@@ -99,6 +99,21 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Table structure for table `reviews` */
+
+DROP TABLE IF EXISTS `reviews`;
+
+CREATE TABLE `reviews` (
+  `id` int(45) NOT NULL AUTO_INCREMENT,
+  `car_id` varchar(100) DEFAULT NULL,
+  `fullname` varchar(100) DEFAULT NULL,
+  `star_rate` int(11) DEFAULT NULL,
+  `details` text,
+  `datearray` date DEFAULT NULL,
+  `timearray` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
