@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+    <title>DOM RENT A CAR | HOMEPAGE</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?=base_url();?>design/assets/css/flaticon.css">
     <link rel="stylesheet" href="<?=base_url();?>design/assets/css/icomoon.css">
     <link rel="stylesheet" href="<?=base_url();?>design/assets/css/style.css">
+    <link rel="icon" type="image/jpg" href="<?=base_url();?>design/admin/images/logo.jpg">
   </head>
   <body>
     

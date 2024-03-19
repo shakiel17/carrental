@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>DOM RENT A CAR | ADMIN PORTAL</title>
 
     <!-- Bootstrap -->
     <link href="<?=base_url();?>design/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,83 +21,35 @@
 
     <!-- Custom Theme Style -->
     <link href="<?=base_url();?>design/admin/build/css/custom.min.css" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="<?=base_url();?>design/admin/images/logo.jpg">
   </head>
 
   <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
+    <div>    
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
-              <h1>Login Form</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+            <?=form_open(base_url()."admin_authentication");?>
+              <h1>Admin Login Portal</h1>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" required="" name="username" />
               </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required=""  name="password" />
               </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+              <div class="form-group">             
+                <input type="submit" class="btn btn-primary btn-sm" value="Log in" style="width:270px;">
               </div>
-
               <div class="clearfix"></div>
 
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+              <div class="separator">                
 
                 <div class="clearfix"></div>
                 <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-                </div>
               </div>
-            </form>
+            <?=form_close();?>
           </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form>
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
+        </div>      
       </div>
     </div>
   </body>

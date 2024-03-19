@@ -16,6 +16,23 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`carrental` /*!40100 DEFAULT CHARACTER S
 
 USE `carrental`;
 
+/*Table structure for table `admin` */
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+  `id` int(45) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `fullname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `admin` */
+
+insert  into `admin`(`id`,`username`,`password`,`fullname`) values 
+(1,'admin','1234','Administrator');
+
 /*Table structure for table `agreement` */
 
 DROP TABLE IF EXISTS `agreement`;
@@ -42,6 +59,8 @@ CREATE TABLE `agreement` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Data for the table `agreement` */
+
 /*Table structure for table `booking` */
 
 DROP TABLE IF EXISTS `booking`;
@@ -63,6 +82,8 @@ CREATE TABLE `booking` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Data for the table `booking` */
+
 /*Table structure for table `cars` */
 
 DROP TABLE IF EXISTS `cars`;
@@ -75,8 +96,11 @@ CREATE TABLE `cars` (
   `amount` double DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
+  `status` varchar(100) DEFAULT 'available',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cars` */
 
 /*Table structure for table `customer` */
 
@@ -99,6 +123,8 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Data for the table `customer` */
+
 /*Table structure for table `reviews` */
 
 DROP TABLE IF EXISTS `reviews`;
@@ -114,6 +140,8 @@ CREATE TABLE `reviews` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Data for the table `reviews` */
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -127,6 +155,8 @@ CREATE TABLE `users` (
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `users` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
