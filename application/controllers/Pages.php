@@ -87,6 +87,25 @@
             $this->load->view('templates/admin/modal'); 
             $this->load->view('templates/admin/footer');       
         }
+        public function manage_cars(){
+            $page = "cars";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }
+            
+            $data['cars'] = $this->Rental_model->getAllCars();                        
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
+        }
         //=================================End of Admin Modules================================
     }
 ?>
