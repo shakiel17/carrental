@@ -57,6 +57,29 @@
             $data['users'] = $this->Rental_model->getAllUsers();
             $data['bookings'] = $this->Rental_model->getAllBookings();
             $data['cars'] = $this->Rental_model->getAllCars();
+            $data['available_cars'] = $this->Rental_model->getAllCarStatus("available");
+            $data['book_pending'] = $this->Rental_model->getAllBookingStatus("pending");
+            $data['book_completed'] = $this->Rental_model->getAllBookingStatus("completed");
+            $data['recent_bookings'] = $this->Rental_model->getRecentBookings();
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
+        }
+        public function manage_bookings(){
+            $page = "bookings";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }
+            
+            $data['bookings'] = $this->Rental_model->getAllBookings();                        
             $this->load->view('templates/admin/header');            
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/navbar');
