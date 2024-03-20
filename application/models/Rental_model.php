@@ -118,5 +118,55 @@
             $result=$this->db->query("SELECT * FROM cars WHERE id='$id'");
             return $result->row_array();
         }
+        public function getAllCarsByType(){
+            $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c LEFT JOIN cartype ct ON ct.id=c.type GROUP BY c.`type` ORDER BY c.`description` ASC");
+            return $result->result_array();
+        }
+        public function getCarsByType($type){
+            $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c LEFT JOIN cartype ct ON ct.id=c.type WHERE c.type='$type' ORDER BY c.`description` ASC");
+            return $result->result_array();
+        }
+        public function save_user(){
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $lastname=$this->input->post('lastname');
+            $firstname=$this->input->post('firstname');
+            $middlename=$this->input->post('middlename');
+            $fullname=$firstname." ".$lastname;
+            $address=$this->input->post('address');
+            $contactno=$this->input->post('contactno');
+            $email=$this->input->post('email');
+            $facebook=$this->input->post('facebook');
+            $v1=$_FILES["vid1"]["tmp_name"];
+            $vid1=addslashes(file_get_contents($v1));
+            $v2=$_FILES["vid2"]["tmp_name"];
+            $vid2=addslashes(file_get_contents($v2));
+            $padd=$_FILES["proof_address"]["tmp_name"];
+            $paddress=addslashes(file_get_contents($padd));
+            $datearray=date('Y-m-d');
+            $timearray=date('H:i:s');
+            $checkuser=$this->db->query("SELECT * FROM users WHERE username='$username'");
+            if($checkuser->num_rows() > 0){
+                return false;
+            }else{
+                $result=$this->db->query("INSERT INTO customer(lastname,firstname,middlename,`address`,contactno,email,facebook,valid_id_1,valid_id_2,proof_of_address,datearray,timearray) VALUES('$lastname','$firstname','$middlename','$address','$contactno','$email','$facebook','$vid1','$vid2','$paddress','$datearray','$timearray')");
+            }
+            if($result){
+                $this->db->query("INSERT INTO users(username,`password`,fullname,datearray,timearray) VALUES('$username','$password','$fullname','$datearray','$timearray')");
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function user_authentication(){
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $result=$this->db->query("SELECT * FROM users WHERE username='$username' AND `password`='$password'");
+            if($result->num_rows()>0){
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
     }
 ?>

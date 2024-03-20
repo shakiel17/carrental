@@ -8,10 +8,116 @@
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
             }
+            // if($this->session->user_login){
+            //     redirect(base_url());
+            // }
+            $data['cars'] = $this->Rental_model->getAllCarsByType();
+            $data['totalcars'] = $this->Rental_model->getAllCars();
+            $data['users'] = $this->Rental_model->getAllUsers();
+            $data['bookings'] = $this->Rental_model->getAllBookings();
+            $data['home'] = 'active';
+            $data['car'] = '';       
+            $data['login'] = '';     
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function cars(){
+            $page = "cars";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }
+            $data['cars'] = $this->Rental_model->getAllCars();     
+            $data['cartype'] = $this->Rental_model->getAllCarType();       
+            $data['home'] = '';
+            $data['car'] = 'active';
+            $data['type'] = "";
+            $data['login'] = '';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function view_car_type($type){
+            $page = "cars";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }
+            $data['cars'] = $this->Rental_model->getCarsByType($type);     
+            $data['cartype'] = $this->Rental_model->getAllCarType();       
+            $data['home'] = '';
+            $data['car'] = 'active';
+            $data['type'] = $type;
+            $data['login'] = '';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function user_login(){
+            $page = "login";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
             if($this->session->user_login){
                 redirect(base_url()."main");
+            }            
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['login'] = 'active';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function save_user(){
+            $username=$this->input->post('username');
+            $lastname=$this->input->post('lastname');
+            $firstname=$this->input->post('firstname');            
+            $fullname=$firstname." ".$lastname;
+            $save=$this->Rental_model->save_user();
+            if($save){
+                $userdata=array(
+                    'username' => $username,
+                    'fullname' => $fullname,
+                    'user_login' => true
+                );
+                $this->session->set_userdata($userdata);
+                redirect(base_url());
+            }else{
+                echo "<script>alert('Unable to sign up!');window.location='".base_url()."user_login';</script>";
             }
-            $this->load->view('pages/'.$page);            
+        }
+        public function user_logout(){
+            $this->session->unset_userdata('username');
+            $this->session->unset_userdata('fullname');
+            $this->session->unset_userdata('user_login');
+            redirect(base_url());
+        }
+        public function user_authentication(){
+            $authenticate=$this->Rental_model->user_authentication();
+            if($authenticate){
+                $user_data=array(
+                    'username' => $authenticate['username'],
+                    'fullname' => $authenticate['fullname'],
+                    'user_login' => true
+                );
+                $this->session->set_userdata($user_data);
+                redirect(base_url());
+            }else{
+                echo "<script>alert('Invalid username and password!');window.location='".base_url()."';</script>";
+            }
         }
         //=================================Start of Admin Modules================================
         public function admin(){
