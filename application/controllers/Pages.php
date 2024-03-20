@@ -98,13 +98,82 @@
                 echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
             }
             
-            $data['cars'] = $this->Rental_model->getAllCars();                        
+            $data['cars'] = $this->Rental_model->getAllCars();
+            $data['cartype'] = $this->Rental_model->getAllCarType();
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal',$data); 
+            $this->load->view('templates/admin/footer');       
+        }
+        public function save_car(){
+            $save=$this->Rental_model->save_car();
+            if($save){
+                echo "<script>alert('Car Details successfully saved!');</script>";
+            }else{
+                echo "<script>alert('Unable to save car details!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_cars';</script>";
+        }
+        public function delete_ca($id){
+            $save=$this->Rental_model->delete_car($id);
+            if($save){
+                echo "<script>alert('Car Details successfully deleted!');</script>";
+            }else{
+                echo "<script>alert('Unable to delete car details!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_cars';</script>";
+        }
+        public function manage_car_type(){
+            $page = "car_type";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }                        
+            $data['cartype'] = $this->Rental_model->getAllCarType();
             $this->load->view('templates/admin/header');            
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/navbar');
             $this->load->view('pages/admin/'.$page,$data);     
             $this->load->view('templates/admin/modal'); 
             $this->load->view('templates/admin/footer');       
+        }
+        public function save_car_type(){
+            $save=$this->Rental_model->save_car_type();
+            if($save){
+                echo "<script>alert('Car Type successfully saved!');</script>";
+            }else{
+                echo "<script>alert('Unable to save car type!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_car_type';</script>";
+        }
+        public function delete_car_type($id){
+            $save=$this->Rental_model->delete_car_type($id);
+            if($save){
+                echo "<script>alert('Car Type successfully deleted!');</script>";
+            }else{
+                echo "<script>alert('Unable to delete car type!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_car_type';</script>";
+        }
+        public function save_car_image(){
+            $save=$this->Rental_model->save_car_image();
+            if($save){
+                echo "<script>alert('Car Image successfully saved!');</script>";
+            }else{
+                echo "<script>alert('Unable to save car Image!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_cars';</script>";
+        }
+        public function view_car_image($id){
+            $page="car_image";
+            $data['image'] = $this->Rental_model->getCar($id);
+            $this->load->view('pages/admin/'.$page,$data);
         }
         //=================================End of Admin Modules================================
     }

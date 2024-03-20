@@ -17,3 +17,98 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade manageCar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <?=form_open(base_url()."save_car");?>
+            <input type="hidden" name="id" id="car_id">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Manage Car</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="car_description" name="description" class="form-control" rows="2" required></textarea>
+                </div>                
+                <div class="form-group">
+                    <label>Type</label>
+                    <select name="type" class="form-control" id="car_type" required>
+                        <option value="">Select Type</option>
+                        <?php
+                            foreach($cartype as $item){
+                                echo "<option value='$item[id]'>$item[description]</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select name="fuel_type" class="form-control" id="car_fuel_type" required>
+                        <option value="">Select Fuel Type</option>
+                        <option value="Gasoline">Gasoline</option>
+                        <option value="Diesel">Diesel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="text" class="form-control" name="amount" id="car_amount">
+                </div>
+            </div>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?=form_close();?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade manageCarType" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <?=form_open(base_url()."save_car_type");?>
+            <input type="hidden" name="id" id="car_type_id">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Manage Car Type</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="car_type_description" name="description" class="form-control" rows="2" required></textarea>
+                </div>                                
+            </div>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?=form_close();?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade manageCarImage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <?=form_open_multipart(base_url()."save_car_image");?>
+            <input type="hidden" name="id" id="car_image_id">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Manage Car Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="image">Add Image</label>
+                    <input type="file" name="file" class="form-control" required>
+                </div>                                
+            </div>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?=form_close();?>
+        </div>
+    </div>
+</div>

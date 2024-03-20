@@ -63,6 +63,38 @@
     <script src="<?=base_url();?>design/admin/vendors/pdfmake/build/vfs_fonts.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="<?=base_url();?>design/admin/build/js/custom.min.js"></script>
-	
+
+    <script>
+      $('.addCarType').click(function(){
+        document.getElementById('car_type_id').value = '';
+        document.getElementById('car_type_description').value = '';
+      });
+      $('.editCarType').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('car_type_id').value = id[0];
+        document.getElementById('car_type_description').value = id[1];
+      });
+      $('.addCar').click(function(){
+        document.getElementById('car_id').value = '';
+        document.getElementById('car_description').value = '';
+        document.getElementById('car_type').value = '';
+        document.getElementById('car_fuel_type').value = '';
+        document.getElementById('car_amount').value = '';
+      });
+      $('.editCar').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('car_id').value = id[0];
+        document.getElementById('car_description').value = id[1];
+        document.getElementById('car_type').value = id[2];
+        document.getElementById('car_fuel_type').value = id[3];
+        document.getElementById('car_amount').value = id[4];
+      });
+      $('.addCarImage').click(function(){
+        var id=$(this).data('id');
+        document.getElementById('car_image_id').value = id;
+      });
+    </script>
   </body>
 </html>
