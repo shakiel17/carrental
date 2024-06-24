@@ -80,6 +80,7 @@
         document.getElementById('car_description').value = '';
         document.getElementById('car_type').value = '';
         document.getElementById('car_fuel_type').value = '';
+        document.getElementById('car_trans_type').value = '';
         document.getElementById('car_amount').value = '';
       });
       $('.editCar').click(function(){
@@ -89,7 +90,8 @@
         document.getElementById('car_description').value = id[1];
         document.getElementById('car_type').value = id[2];
         document.getElementById('car_fuel_type').value = id[3];
-        document.getElementById('car_amount').value = id[4];
+        document.getElementById('car_trans_type').value = id[4];
+        document.getElementById('car_amount').value = id[5];
       });
       $('.addCarImage').click(function(){
         var id=$(this).data('id');

@@ -47,13 +47,14 @@
             $description=$this->input->post('description');
             $type=$this->input->post('type');
             $fuel_type=$this->input->post('fuel_type');
+            $trans_type=$this->input->post('trans_type');
             $amount=$this->input->post('amount');            
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
                 if($id==""){
-                    $result=$this->db->query("INSERT INTO cars(`description`,`type`,`fuel_type`,amount,datearray,timearray,`image`) VALUES('$description','$type','$fuel_type','$amount','$datearray','$timearray','')");
+                    $result=$this->db->query("INSERT INTO cars(`description`,`type`,`fuel_type`,`trans_type`,amount,datearray,timearray,`image`) VALUES('$description','$type','$fuel_type','$amount','$datearray','$timearray','')");
                 }else{
-                    $result=$this->db->query("UPDATE cars SET `description`='$description',`type`='$type',fuel_type='$fuel_type',amount='$amount' WHERE id='$id'");
+                    $result=$this->db->query("UPDATE cars SET `description`='$description',`type`='$type',fuel_type='$fuel_type',trans_type='$trans_type',amount='$amount' WHERE id='$id'");
                 }            
             if($result){
                 return true;
@@ -167,6 +168,14 @@
             }else{
                 return false;
             }
+        }
+        public function getSingleCar($id){
+            $result=$this->db->query("SELECT c.*,ct.description as car_type FROM cars c INNER JOIN cartype ct ON ct.id=c.type WHERE c.id='$id'");
+            return $result->row_array();
+        }
+        public function getSingleCarReview($id){
+            $result=$this->db->query("SELECT * FROM reviews WHERE car_id='$id'");
+            return $result->result_array();
         }
     }
 ?>

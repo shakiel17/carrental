@@ -22,6 +22,7 @@
                                             <th>Description</th>
                                             <th>Type</th>
                                             <th>Fuel</th>
+                                            <th>Transmission</th>
                                             <th>Amount</th>
                                             <th>Status</th>                                            
                                             <th>Action</th>                                            
@@ -42,11 +43,12 @@
                                                 echo "<td>$item[description]</td>";                                                
                                                 echo "<td>$item[type_desc]</td>";
                                                 echo "<td>$item[fuel_type]</td>";
+                                                echo "<td>$item[trans_type]</td>";
                                                 echo "<td align='right'>".number_format($item['amount'],2)."</td>";
                                                 echo "<td>$item[status]</td>";
                                                 echo "<td>";
                                                 ?>
-                                                    <a href="#" class="btn btn-warning btn-sm editCar" data-toggle="modal" data-target=".manageCar" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$item['type'];?>_<?=$item['fuel_type'];?>_<?=$item['amount'];?>">Edit</a>
+                                                    <a href="#" class="btn btn-warning btn-sm editCar" data-toggle="modal" data-target=".manageCar" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$item['type'];?>_<?=$item['fuel_type'];?>_<?=$item['trans_type'];?>_<?=$item['amount'];?>">Edit</a>
                                                     <a href="<?=base_url();?>delete_car/<?=$item['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you wish to delete this item?');return false;">Delete</a>
                                                 <?php
                                                 echo "</td>";

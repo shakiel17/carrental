@@ -45,11 +45,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Type</label>
+                    <label> Fuel Type</label>
                     <select name="fuel_type" class="form-control" id="car_fuel_type" required>
                         <option value="">Select Fuel Type</option>
                         <option value="Gasoline">Gasoline</option>
                         <option value="Diesel">Diesel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Transmission Type</label>
+                    <select name="trans_type" class="form-control" id="car_trans_type" required>
+                        <option value="">Select Transmission Type</option>
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -103,6 +111,38 @@
                 <div class="form-group">
                     <label for="image">Add Image</label>
                     <input type="file" name="file" class="form-control" required>
+                </div>                                
+            </div>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?=form_close();?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="giveReview" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <?=form_open(base_url()."save_review");?>
+            <input type="hidden" name="id" id="car_id">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Give Review</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Rating</label>
+                    <input type="radio" class="form-control" name="rating" value="1"> 1
+                    <input type="radio" class="form-control" name="rating" value="2"> 2
+                    <input type="radio" class="form-control" name="rating" value="3"> 3
+                    <input type="radio" class="form-control" name="rating" value="4"> 4
+                    <input type="radio" class="form-control" name="rating" value="5"> 5
+                </div>
+                <div class="form-group">
+                    <label>Details</label>
+                    <textarea id="review_details" name="description" class="form-control" rows="2" required></textarea>
                 </div>                                
             </div>
             <div class="modal-footer">                
