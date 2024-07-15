@@ -20,6 +20,7 @@
       				<div class="text text-center">
       					<span class="subheading"><?=$cars['car_type'];?></span>
       					<h2><?=$cars['description'];?></h2>
+						<a href="" class="btn btn-success">Book Now</a>
       				</div>
       			</div>
       		</div>
@@ -182,6 +183,9 @@
 							   		<div class="col-md-5">
 							   			<div class="rating-wrap">
 								   			<h3 class="head">Give a Review</h3>
+											   <?php
+										if($this->session->user_login){
+									?>
                         <div class="rating">
                           <?=form_open(base_url()."save_review");?>
                           <div class="form-group">
@@ -224,12 +228,21 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                                  <td>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</td>
                                 </tr>
                               </table>                              
                             </div>  
                           <?=form_close();?>
                         </div>
+						<?php
+										}else{
+											?>
+											<a href="<?=base_url();?>user_login/view_car_details/<?=$id;?>" class="btn btn-primary">Login</a>
+											<?php
+										}
+									?>
 								   			<div class="wrap">
 									   			<p class="star">
 									   				<span>

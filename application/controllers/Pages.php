@@ -58,6 +58,7 @@
             $data['car'] = 'active';
             $data['type'] = "";
             $data['login'] = '';
+            $data['id'] = $id;
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -84,7 +85,7 @@
             $this->load->view('templates/user/modal');                        
             $this->load->view('templates/user/footer');
         }
-        public function user_login(){
+        public function user_login($loc,$id){
             $page = "login";
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
@@ -95,6 +96,8 @@
             $data['home'] = '';
             $data['car'] = '';
             $data['login'] = 'active';
+            $data['location'] = $loc;
+            $data['id'] = $id;
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -126,6 +129,8 @@
             redirect(base_url());
         }
         public function user_authentication(){
+            $loc=$this->input->post('location');
+            $id=$this->input->post('id');
             $authenticate=$this->Rental_model->user_authentication();
             if($authenticate){
                 $user_data=array(
@@ -134,9 +139,13 @@
                     'user_login' => true
                 );
                 $this->session->set_userdata($user_data);
-                redirect(base_url());
+                if($loc==0 && $id==0){
+                    redirect(base_url());
+                }else{
+                    redirect(base_url()."$loc/$id");
+                }
             }else{
-                echo "<script>alert('Invalid username and password!');window.location='".base_url()."';</script>";
+                echo "<script>alert('Invalid username and password!');window.location='".base_url()."user_login/$loc/$id';</script>";
             }
         }
         //=================================Start of Admin Modules================================

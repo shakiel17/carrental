@@ -19,7 +19,7 @@
               <?php
               }else{
               ?>
-              <li class="nav-item <?=$login;?>"><a href="<?=base_url();?>user_login" class="nav-link">Login</a></li>
+              <li class="nav-item <?=$login;?>"><a href="<?=base_url();?>user_login/0/0" class="nav-link">Login</a></li>
               <?php  
               }
               ?>	          

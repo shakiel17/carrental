@@ -14,7 +14,9 @@
       <div class="container">
         <div class="row d-flex mb-5 contact-info">            
         	<div class="col-md-6 block-9">
-                <?=form_open(base_url()."user_authentication",array('class' => 'bg-light p-5 contact-form'));?>                
+                <?=form_open(base_url()."user_authentication",array('class' => 'bg-light p-5 contact-form'));?>
+                    <input type="hidden" name="location" value="<?=$location;?>" />
+                    <input type="hidden" name="id" value="<?=$id;?>" />
                     <div class="form-group">Sign in</div>                
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" placeholder="Username">
