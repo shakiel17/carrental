@@ -18,6 +18,7 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
+							  	<th>&nbsp;</th>
 						        <th>&nbsp;</th>
 						        <th>&nbsp;</th>
 						        <th class="bg-primary heading">Destination</th>
@@ -27,22 +28,41 @@
 						    </thead>
 						    <tbody>
                                 <?php
+								$x=1;
                                 foreach($bookings as $item){
                                     $car=$this->Rental_model->getSingleCar($item['car_id']);
                                 ?>
 						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(data:image/jpg;charset=utf8;base64,<?=base64_encode($car['image']);?>);"></div></td>
+								<td><?=$x;?>.</td>
+						      	<td class="car-image"><div class="img" style="background-image:url(data:image/jpg;charset=utf8;base64,<?=base64_encode($car['image']);?>);"></div>
+								<br>
+								<?php
+								if($item['payment_type']==""){
+								?>
+								<a href="" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Payment</a>
+								<?php
+								}else{
+									echo "Payment Type: ".$item['payment_type'];
+								}
+								?>
+								</td>
 						        <td class="product-name">
 						        	<h3><?=$car['description'];?></h3>
 						        	<p class="mb-0 rated">
 						        		<span>rated:</span>
                                         <?php
                                         $review=$this->Rental_model->getSingleUserCarReview($item['car_id'],$this->session->username);
-                                        for($x=0;$x<$review['star_rate'];$x++){
-                                        ?>                                        
-						        		<span class="ion-ios-star"></span>
-						        		<?php
-                                        }
+										if($review['customer_id'] != ""){
+											for($x=0;$x<$review['star_rate'];$x++){
+											?>                                        
+											<span class="ion-ios-star"></span>
+											<?php
+											}
+										}else{
+											?>
+											<a href="<?=base_url();?>view_car_details/<?=$item['car_id'];?>" class="btn btn-success btn-sm">Rate Now</a>
+											<?php
+										}
                                         ?>
 						        	</p>
 						        </td>
@@ -52,9 +72,9 @@
 						        </td>
 						        <?php
 								if($item['date_started']==$item['date_return']){
-									$inc_date=date('M d, Y',strtotime($item['date_started']))."<br>".date('h:i A',strtotime($item['time_started']))." - ".date('h:i A',strtotime($item['time_return']));
+									$inc_date=date('F d, Y',strtotime($item['date_started']))."<br>".date('h:i A',strtotime($item['time_started']))." - ".date('h:i A',strtotime($item['time_return']));
 								}else{
-									$inc_date=date('M d, Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."<br>".date('M d, Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']));
+									$inc_date=date('F d, Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."<br>".date('F d, Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']));
 								}
 								?>
 						        <td class="price">

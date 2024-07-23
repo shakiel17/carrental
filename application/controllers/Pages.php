@@ -179,9 +179,11 @@
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
             }
-            // if($this->session->user_login){
+            if($this->session->user_login){
             //     redirect(base_url()."main");
-            // }
+             }else{
+                redirect(base_url()."user_login/view_car_details/$id");
+             }
             $data['cars'] = $this->Rental_model->getSingleCar($id);            
             $data['home'] = '';
             $data['car'] = 'active';

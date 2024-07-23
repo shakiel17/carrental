@@ -1,3 +1,11 @@
+<?php
+$check=$this->Rental_model->db->query("SELECT * FROM booking WHERE car_id='$id' AND customer_id='".$this->session->username."' AND (`status`='pending' OR `status`='approved')");
+if($check->num_rows()>0){
+  $status="disabled";
+}else{
+  $status='';
+}
+?>
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<?=base_url();?>design/assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -20,7 +28,7 @@
       				<div class="text text-center">
       					<span class="subheading"><?=$cars['car_type'];?></span>
       					<h2><?=$cars['description'];?></h2>
-						<a href="" class="btn btn-success">Book Now</a>
+						<a href="<?=base_url();?>car_booking/<?=$id;?>" class="btn btn-success" <?=$status;?>>Book Now</a>
       				</div>
       			</div>
       		</div>

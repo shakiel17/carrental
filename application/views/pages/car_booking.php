@@ -1,3 +1,13 @@
+<?php
+$check=$this->Rental_model->db->query("SELECT * FROM booking WHERE car_id='$id' AND customer_id='".$this->session->username."' AND (`status`='pending' OR `status`='approved')");
+if($check->num_rows()>0){
+  $status="disabled";
+  $remarks="You already have bookings for this car!";
+}else{
+  $status='';
+  $remarks='';
+}
+?>
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<?=base_url();?>design/assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -112,9 +122,9 @@
                         <label class="label">Destination</label>
                         <input type="text" name="destination" class="form-control">
                     </div>
-                    <div class="form-group">
-                        
-                        <input type="submit" name="submit" class="btn btn-secondary py-3 px-4" value="Submit">
+                    <div class="form-group">                                              
+                        <input type="submit" name="submit" class="btn btn-secondary py-3 px-4" value="Submit" <?=$status;?>>
+                        <b style="color:red;"><?=$remarks;?></b>
                     </div>
                 <?=form_close();?>
 		    </div>
