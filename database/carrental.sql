@@ -73,7 +73,7 @@ CREATE TABLE `booking` (
   `proof_of_payment` varchar(100) DEFAULT NULL,
   `payment_type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `cars` */
 
@@ -131,13 +131,14 @@ DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
   `car_id` varchar(100) DEFAULT NULL,
+  `customer_id` varchar(100) DEFAULT NULL,
   `fullname` varchar(100) DEFAULT NULL,
   `star_rate` int(11) DEFAULT NULL,
   `details` text,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Table structure for table `users` */
 

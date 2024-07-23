@@ -17,7 +17,8 @@
             $data['bookings'] = $this->Rental_model->getAllBookings();
             $data['home'] = 'active';
             $data['car'] = '';       
-            $data['login'] = '';     
+            $data['login'] = '';  
+            $data['booking'] = '';   
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -38,6 +39,7 @@
             $data['car'] = 'active';
             $data['type'] = "";
             $data['login'] = '';
+            $data['booking'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -58,6 +60,7 @@
             $data['car'] = 'active';
             $data['type'] = "";
             $data['login'] = '';
+            $data['booking'] = '';
             $data['id'] = $id;
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
@@ -79,6 +82,7 @@
             $data['car'] = 'active';
             $data['type'] = $type;
             $data['login'] = '';
+            $data['booking'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -96,7 +100,7 @@
             $data['home'] = '';
             $data['car'] = '';
             $data['login'] = 'active';
-            $data['location'] = $loc;
+            $data['location'] = $loc;            
             $data['id'] = $id;
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
@@ -146,6 +150,58 @@
                 }
             }else{
                 echo "<script>alert('Invalid username and password!');window.location='".base_url()."user_login/$loc/$id';</script>";
+            }
+        }
+
+        public function user_bookings(){
+            $page = "user_bookings";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }            
+            $data['bookings'] = $this->Rental_model->getAllUserBooking($this->session->username);       
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = 'active';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+
+        public function car_booking($id){
+            $page = "car_booking";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }
+            $data['cars'] = $this->Rental_model->getSingleCar($id);            
+            $data['home'] = '';
+            $data['car'] = 'active';
+            $data['type'] = "";
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['id'] = $id;
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function book_save(){
+            $id=$this->input->post('car_id');
+            $book=$this->Rental_model->book_save();
+            if($book){
+                echo "<script type='text/javascript'>alert('Booking Successfully saved!');window.location='".base_url()."user_bookings';</script>";
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
             }
         }
         //=================================Start of Admin Modules================================

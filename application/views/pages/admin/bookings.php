@@ -34,15 +34,18 @@
                                         <?php
                                         $x=1;
                                         foreach($bookings as $item){
+                                            $user=$this->Rental_model->getSingleUser($item['customer_id']);
+                                            $car=$this->Rental_model->getSingleCar($item['car_id']);
                                             echo "<tr>";
                                                 echo "<td>$x.</td>";
-                                                echo "<td>$item[lastname], $item[firstname] $item[middlename]</td>";
-                                                echo "<td>$item[description]</td>";
+                                                echo "<td>$user[fullname]</td>";
+                                                echo "<td>$car[description]</td>";
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."</td>";
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']))."</td>";
                                                 echo "<td>$item[destination]</td>";
-                                                echo "<td>$item[proof_of_payment]</td>";
                                                 echo "<td>$item[status]</td>";
+                                                echo "<td>$item[proof_of_payment]</td>";
+                                                echo "<td></td>";
                                             echo "</tr>";
                                             $x++;
                                         }

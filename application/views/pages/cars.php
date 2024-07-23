@@ -27,7 +27,7 @@
 	    						<span class="cat"><?=$item['type_desc'];?></span>
 	    						<p class="price ml-auto">&#8369; <?=number_format($item['amount'],0);?> <span>/day</span></p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 ml-1">Book now</a> <a href="<?=base_url();?>view_car_details/<?=$item['id'];?>" class="btn btn-secondary py-2 ml-1">Details</a></p>
+    						<p class="d-flex mb-0 d-block"><a href="<?=base_url();?>car_booking/<?=$item['id'];?>" class="btn btn-primary py-2 ml-1">Book now</a> <a href="<?=base_url();?>view_car_details/<?=$item['id'];?>" class="btn btn-secondary py-2 ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>    			
