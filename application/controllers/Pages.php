@@ -206,6 +206,17 @@
                 echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
             }
         }
+        public function cancel_user_booking($id){
+            $cancel=$this->Rental_model->cancel_booking($id);
+            echo "<script type='text/javascript'>";
+            if($cancel){
+                echo "alert('Booking successfully cancelled!');";
+            }else{
+                echo "alert('Unbale to cancel booking!');";
+            }
+                echo "window.location='".base_url()."user_bookings';";
+            echo "</script>";
+        }
         //=================================Start of Admin Modules================================
         public function admin(){
             $page = "index";
@@ -228,7 +239,7 @@
                 $this->session->set_userdata($user_data);
                 redirect(base_url()."admin_main");
             }else{
-                echo "<script>alert('Invalid username and password!');window.location='".base_url()."admin';</script>";
+                echo "<script>alert('Invalid username and password!');window.location='".base_url()."admin';</>";
             }
         }
         public function admin_logout(){

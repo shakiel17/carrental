@@ -193,9 +193,10 @@
             $date_return=$this->input->post('date_return');
             $time_return=$this->input->post('time_return');
             $destination=$this->input->post('destination');
+            $mode=$this->input->post('payment');
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
-            $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray')");
+            $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray,payment_mode) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray','$mode')");
             if($result){
                 return true;
             }else{
@@ -205,6 +206,14 @@
         public function getSingleUser($username){
             $result=$this->db->query("SELECT * FROM users WHERE username='$username'");
             return $result->row_array();
+        }
+        public function cancel_booking($id){
+            $result=$this->db->query("UPDATE booking SET `status`='cancel' WHERE id='$id'");
+            if($result){
+                return  true;
+            }else{
+                return false;
+            }
         }
     }
 ?>

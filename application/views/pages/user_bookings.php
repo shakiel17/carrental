@@ -28,8 +28,9 @@
 						    </thead>
 						    <tbody>
                                 <?php
-								$x=1;
+								$x=0;
                                 foreach($bookings as $item){
+									$x++;
                                     $car=$this->Rental_model->getSingleCar($item['car_id']);
                                 ?>
 						      <tr class="">
@@ -37,12 +38,32 @@
 						      	<td class="car-image"><div class="img" style="background-image:url(data:image/jpg;charset=utf8;base64,<?=base64_encode($car['image']);?>);"></div>
 								<br>
 								<?php
-								if($item['payment_type']==""){
+								if($item['payment_type']=="GCash" || $item['payment_type']=="Bank"){
+									echo "Payment Type: ".$item['payment_type']."<br>";
+									if($item['proof_of_payment']==""){
 								?>
-								<a href="" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Payment</a>
+								<a href="" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Proof of Payment</a><br>
 								<?php
+									}else{
+										
+										?>
+										<a href="" class="btn btn-sm btn-danger"><i class="ion-ios-trash"></i> Remove PoP</a> <a href="" class="btn btn-sm btn-info"><i class="ion-ios-eye"></i> View</a></a><br>
+										<?php
+									}
 								}else{
-									echo "Payment Type: ".$item['payment_type'];
+									echo "Payment Type: ".$item['payment_type']."<br>";
+								}
+								if($item['status']=="pending"){
+									?>
+									<a href="<?=base_url();?>cancel_user_booking/<?=$item['id'];?>" class="btn btn-sm btn-danger mt-1" onclick="return confirm('Do you wish to cancel this booking?');return false;"><i class="ion-ios-trash"></i> Cancel</a>
+									<?php
+								}else{
+									if($item['status']=="cancel"){
+										$status="<font color='red'>cancelled</font>";
+									}else{
+										$status="<font color='blue'>$item[status]</font>";
+									}
+									echo "Status: ".$status;
 								}
 								?>
 								</td>
