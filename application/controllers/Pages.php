@@ -218,15 +218,38 @@
             echo "</script>";
         }
         public function cancel_booking($id){
-            $cancel=$this->Rental_model->cancel_booking($id);
-            echo "<script type='text/javascript'>";
-            if($cancel){
-                echo "alert('Booking successfully cancelled!');";
+            $message="Hello,
+            
+We regret to inform you that we cancel your booking for some reasons. You may come to our office for more details.
+            
+Thank you.";
+            $prof=$this->Rental_model->getUserEmail($id);
+            $email=$prof['email'];
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'acitsolutions17@gmail.com',
+                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'mailtype' => 'text',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE
+            );
+            $this->load->library('email',$config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('DOM Car Rental');
+            $this->email->to($email);
+            $this->email->subject('Booking Cancellation!');
+            $this->email->message($message);
+            // $this->email->send();
+            // $this->email->print_debugger();
+            if($this->email->send()){
+                $this->Rental_model->cancel_booking($id);
+                $this->session->set_flashdata("success","Booking status successfully updated!");
             }else{
-                echo "alert('Unbale to cancel booking!');";
+                $this->session->set_flashdata("failed","Unable to update booking status!");
             }
-                echo "window.location='".base_url()."manage_bookings';";
-            echo "</script>";
+            redirect(base_url()."manage_bookings");            
         }
         public function upload_pop($id){
             $page = "upload_pop";
@@ -268,6 +291,70 @@
             }else{
                 echo "<script type='text/javascript'>alert('Unable to remove proof of payment!');window.location='".base_url()."user_bookings';</script>";
             }
+        }
+        public function confirm_booking(){
+            $id=$this->input->post('id');
+            $message=$this->input->post('remarks');
+            $prof=$this->Rental_model->getUserEmail($id);
+            $email=$prof['email'];
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'acitsolutions17@gmail.com',
+                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'mailtype' => 'text',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE
+            );
+            $this->load->library('email',$config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('DOM Car Rental');
+            $this->email->to($email);
+            $this->email->subject('Booking Confirmation!');
+            $this->email->message($message);
+            // $this->email->send();
+            // $this->email->print_debugger();
+            if($this->email->send()){
+                $this->Rental_model->confirm_booking($id);                
+                $this->session->set_flashdata("success","Booking status successfully updated!");
+            }else{
+                $this->session->set_flashdata("failed","Unable to update booking status!");
+            }
+            redirect(base_url()."manage_bookings");
+        }
+
+        public function complete_booking($id){
+            $message="Hello,
+            
+Thank you for your support and we will be glad if you come back and rent again.";
+            $prof=$this->Rental_model->getUserEmail($id);
+            $email=$prof['email'];
+            $config = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'acitsolutions17@gmail.com',
+                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'mailtype' => 'text',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE
+            );
+            $this->load->library('email',$config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('DOM Car Rental');
+            $this->email->to($email);
+            $this->email->subject('Booking Complete!');
+            $this->email->message($message);
+            // $this->email->send();
+            // $this->email->print_debugger();
+            if($this->email->send()){
+                $this->Rental_model->complete_booking($id);
+                $this->session->set_flashdata("success","Booking status successfully updated!");
+            }else{
+                $this->session->set_flashdata("failed","Unable to update booking status!");
+            }
+            redirect(base_url()."manage_bookings");            
         }
         //=================================Start of Admin Modules================================
         public function admin(){

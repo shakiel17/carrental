@@ -1,5 +1,5 @@
 <?php
-$check=$this->Rental_model->db->query("SELECT * FROM booking WHERE car_id='$id' AND customer_id='".$this->session->username."' AND (`status`='pending' OR `status`='approved')");
+$check=$this->Rental_model->db->query("SELECT * FROM booking WHERE car_id='$id' AND customer_id='".$this->session->username."' AND (`status`='pending' OR `status`='booked')");
 if($check->num_rows()>0){
   $status="disabled";
   $remarks="You already have bookings for this car!";

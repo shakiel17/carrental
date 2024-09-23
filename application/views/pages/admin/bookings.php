@@ -12,6 +12,24 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  <?php
+                  if($this->session->success){
+                  ?>
+                  <div class="alert alert-success">
+                    <?=$this->session->success;?>  
+                  </div>
+                  <?php
+                  }
+                  ?>
+                  <?php
+                  if($this->session->failed){
+                  ?>
+                  <div class="alert alert-danger">
+                    <?=$this->session->failed;?>  
+                  </div>
+                  <?php
+                  }
+                  ?>
                   <div class="x_content">
                       <div class="row">
                           <div class="col-sm-12">
@@ -67,7 +85,7 @@
                                                     <?php
                                                     if($item['status']=="booked"){
                                                         ?>
-                                                        <a href=""><span class="badge badge-info text-white">Complete</span></a>
+                                                        <a href="<?=base_url();?>complete_booking/<?=$item['id'];?>" onclick="return confirm('Do you wish to comnplete this booking?');return false;"><span class="badge badge-info text-white">Complete</span></a>
                                                         <?php
                                                     }
                                                     ?>                                                                                                        

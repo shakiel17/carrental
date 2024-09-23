@@ -55,7 +55,7 @@
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+			              <a href="<?=base_url();?>cars" type="button" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">Rent A Car Now</a>
 			            </div>
 			    			</form>
 	  					</div>

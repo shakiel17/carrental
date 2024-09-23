@@ -211,6 +211,10 @@
             $result=$this->db->query("SELECT * FROM users WHERE username='$username'");
             return $result->row_array();
         }
+        public function getUserEmail($id){
+            $result=$this->db->query("SELECT c.email FROM customer c INNER JOIN booking b ON b.customer_id=c.username WHERE b.id='$id'");
+            return $result->row_array();
+        }
         public function cancel_booking($id){
             $result=$this->db->query("UPDATE booking SET `status`='cancel' WHERE id='$id'");
             if($result){
@@ -243,6 +247,22 @@
         }
         public function remove_pop($id){
             $result=$this->db->query("UPDATE booking SET proof_of_payment='' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function confirm_booking($id){
+            $result=$this->db->query("UPDATE booking SET `status`='booked' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function complete_booking($id){
+            $result=$this->db->query("UPDATE booking SET `status`='completed' WHERE id='$id'");
             if($result){
                 return true;
             }else{

@@ -38,16 +38,20 @@
 						      	<td class="car-image"><div class="img" style="background-image:url(data:image/jpg;charset=utf8;base64,<?=base64_encode($car['image']);?>);"></div>
 								<br>
 								<?php
-								if($item['payment_type']=="GCash" || $item['payment_type']=="Bank"){
+								if($item['payment_type']=="GCash" || $item['payment_type']=="Bank"){									
 									echo "Payment Type: ".$item['payment_type']."<br>";
 									if($item['proof_of_payment']==""){
 								?>
 								<a href="<?=base_url();?>upload_pop/<?=$item['id'];?>" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Proof of Payment</a><br>
 								<?php
 									}else{
-										
+										if($item['status']=="pending"){
 										?>
-										<a href="<?=base_url();?>remove_pop/<?=$item['id'];?>" class="btn btn-sm btn-danger" onclick="return confirm('Do you wish to remove proof of payment?');return false;"><i class="ion-ios-trash"></i> Remove PoP</a> <a href="<?=base_url();?>view_pop_image/<?=$item['id'];?>" class="btn btn-sm btn-info" target="_blank"><i class="ion-ios-eye"></i> View</a></a><br>
+										<a href="<?=base_url();?>remove_pop/<?=$item['id'];?>" class="btn btn-sm btn-danger" onclick="return confirm('Do you wish to remove proof of payment?');return false;"><i class="ion-ios-trash"></i> Remove PoP</a>
+										<?php
+										}
+										?>
+										<a href="<?=base_url();?>view_pop_image/<?=$item['id'];?>" class="btn btn-sm btn-info" target="_blank"><i class="ion-ios-eye"></i> View</a></a><br>
 										<?php
 									}
 								}else{
