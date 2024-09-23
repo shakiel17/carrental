@@ -217,6 +217,58 @@
                 echo "window.location='".base_url()."user_bookings';";
             echo "</script>";
         }
+        public function cancel_booking($id){
+            $cancel=$this->Rental_model->cancel_booking($id);
+            echo "<script type='text/javascript'>";
+            if($cancel){
+                echo "alert('Booking successfully cancelled!');";
+            }else{
+                echo "alert('Unbale to cancel booking!');";
+            }
+                echo "window.location='".base_url()."manage_bookings';";
+            echo "</script>";
+        }
+        public function upload_pop($id){
+            $page = "upload_pop";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }            
+            $data['id'] = $id;       
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = 'active';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function upload_pop_save(){            
+            $book=$this->Rental_model->upload_pop_save();
+            if($book){
+                echo "<script type='text/javascript'>alert('Proof of Payment successfully uploaded!');window.location='".base_url()."user_bookings';</script>";
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to upload proof of payment!');window.location='".base_url()."user_bookings';</script>";
+            }
+        }
+        public function view_pop_image($id){
+            $page="pop_image";
+            $data['image'] = $this->Rental_model->getProofPayment($id);
+            $this->load->view('pages/'.$page,$data);
+        }
+        public function remove_pop($id){            
+            $book=$this->Rental_model->remove_pop($id);
+            if($book){
+                echo "<script type='text/javascript'>alert('Proof of Payment successfully removed!');window.location='".base_url()."user_bookings';</script>";
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to remove proof of payment!');window.location='".base_url()."user_bookings';</script>";
+            }
+        }
         //=================================Start of Admin Modules================================
         public function admin(){
             $page = "index";

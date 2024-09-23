@@ -35,7 +35,7 @@
             return $result->result_array();
         }
         public function getRecentBookings(){
-            $result=$this->db->query("SELECT c.*,b.id as bid,b.*,cr.description FROM booking b INNER JOIN customer c ON c.id=b.customer_id INNER JOIN cars cr ON cr.id=b.car_id ORDER BY b.datearray DESC LIMIT 10");
+            $result=$this->db->query("SELECT c.*,b.id as bid,b.*,cr.description FROM booking b INNER JOIN customer c ON c.username=b.customer_id INNER JOIN cars cr ON cr.id=b.car_id ORDER BY b.datearray DESC LIMIT 10");
             return $result->result_array();
         }
         public function getAllCarType(){
@@ -52,7 +52,7 @@
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
                 if($id==""){
-                    $result=$this->db->query("INSERT INTO cars(`description`,`type`,`fuel_type`,`trans_type`,amount,datearray,timearray,`image`) VALUES('$description','$type','$fuel_type','$amount','$datearray','$timearray','')");
+                    $result=$this->db->query("INSERT INTO cars(`description`,`type`,`fuel_type`,`trans_type`,amount,datearray,timearray,`image`) VALUES('$description','$type','$fuel_type','$trans_type','$amount','$datearray','$timearray','')");
                 }else{
                     $result=$this->db->query("UPDATE cars SET `description`='$description',`type`='$type',fuel_type='$fuel_type',trans_type='$trans_type',amount='$amount' WHERE id='$id'");
                 }            
@@ -150,7 +150,7 @@
             if($checkuser->num_rows() > 0){
                 return false;
             }else{
-                $result=$this->db->query("INSERT INTO customer(lastname,firstname,middlename,`address`,contactno,email,facebook,valid_id_1,valid_id_2,proof_of_address,datearray,timearray) VALUES('$lastname','$firstname','$middlename','$address','$contactno','$email','$facebook','$vid1','$vid2','$paddress','$datearray','$timearray')");
+                $result=$this->db->query("INSERT INTO customer(lastname,firstname,middlename,`address`,contactno,email,facebook,valid_id_1,valid_id_2,proof_of_address,datearray,timearray,username) VALUES('$lastname','$firstname','$middlename','$address','$contactno','$email','$facebook','$vid1','$vid2','$paddress','$datearray','$timearray','$username')");
             }
             if($result){
                 $this->db->query("INSERT INTO users(username,`password`,fullname,datearray,timearray) VALUES('$username','$password','$fullname','$datearray','$timearray')");
@@ -183,7 +183,11 @@
         }
         public function getSingleUserCarReview($id,$username){
             $result=$this->db->query("SELECT * FROM reviews WHERE car_id='$id' AND customer_id='$username'");
-            return $result->row_array();
+            if($result->num_rows()>0){
+                return $result->row_array();
+            }else{
+                return false;
+            }
         }
         public function book_save(){
             $id=$this->input->post('car_id');
@@ -196,7 +200,7 @@
             $mode=$this->input->post('payment');
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
-            $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray,payment_mode) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray','$mode')");
+            $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray,payment_type) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray','$mode')");
             if($result){
                 return true;
             }else{
@@ -211,6 +215,36 @@
             $result=$this->db->query("UPDATE booking SET `status`='cancel' WHERE id='$id'");
             if($result){
                 return  true;
+            }else{
+                return false;
+            }
+        }
+        public function upload_pop_save(){
+            $id=$this->input->post('id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('jpg','png','jpeg','gif');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("UPDATE booking SET `proof_of_payment`='$imgContent' WHERE id='$id'");            
+            }else{
+                return false;
+            }            
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getProofPayment($id){
+            $result=$this->db->query("SELECT * FROM booking WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function remove_pop($id){
+            $result=$this->db->query("UPDATE booking SET proof_of_payment='' WHERE id='$id'");
+            if($result){
+                return true;
             }else{
                 return false;
             }

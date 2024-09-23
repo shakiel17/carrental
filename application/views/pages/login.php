@@ -33,43 +33,43 @@
             <?=form_open(base_url()."save_user",array('class' => 'bg-light p-5 contact-form','enctype' => 'multipart/form-data'));?>                
                 <div class="form-group">Sign up</div>                
                 <div class="form-group">
-                    <input type="text" name="lastname" class="form-control" placeholder="Last Name">
+                    <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="firstname" class="form-control" placeholder="First Name">
+                    <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="middlename" class="form-control" placeholder="Middle Name">
+                    <input type="text" name="middlename" class="form-control" placeholder="Middle Name" required>
                 </div>
                 <div class="form-group">
                     <textarea name="address" cols="30" rows="3" class="form-control" placeholder="Address"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="contactno" class="form-control" placeholder="Contact Number">
+                    <input type="text" name="contactno" class="form-control" placeholder="Contact Number" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="Email Address">
+                    <input type="text" name="email" class="form-control" placeholder="Email Address" required>
                 </div>
                 <div class="form-group">
                     <input type="text" name="facebook" class="form-control" placeholder="Facebook account">
                 </div>
                 <div class="form-group">
                     <label>Valid ID 1</label>
-                    <input type="file" name="vid1" class="form-control" placeholder="Valid ID">
+                    <input type="file" name="vid1" class="form-control" placeholder="Valid ID" required>
                 </div>
                 <div class="form-group">
                     <label>Valid ID 2</label>
-                    <input type="file" name="vid2" class="form-control" placeholder="Valid ID">
+                    <input type="file" name="vid2" class="form-control" placeholder="Valid ID" required>
                 </div>
                 <div class="form-group">
                     <label>Proof of Address</label>
-                    <input type="file" name="proof_address" class="form-control" placeholder="Valid ID">
+                    <input type="file" name="proof_address" class="form-control" placeholder="Valid ID" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username">
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">

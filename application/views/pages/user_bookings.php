@@ -42,12 +42,12 @@
 									echo "Payment Type: ".$item['payment_type']."<br>";
 									if($item['proof_of_payment']==""){
 								?>
-								<a href="" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Proof of Payment</a><br>
+								<a href="<?=base_url();?>upload_pop/<?=$item['id'];?>" class="btn btn-sm btn-primary"><i class="ion-ios-card"></i> Proof of Payment</a><br>
 								<?php
 									}else{
 										
 										?>
-										<a href="" class="btn btn-sm btn-danger"><i class="ion-ios-trash"></i> Remove PoP</a> <a href="" class="btn btn-sm btn-info"><i class="ion-ios-eye"></i> View</a></a><br>
+										<a href="<?=base_url();?>remove_pop/<?=$item['id'];?>" class="btn btn-sm btn-danger" onclick="return confirm('Do you wish to remove proof of payment?');return false;"><i class="ion-ios-trash"></i> Remove PoP</a> <a href="<?=base_url();?>view_pop_image/<?=$item['id'];?>" class="btn btn-sm btn-info" target="_blank"><i class="ion-ios-eye"></i> View</a></a><br>
 										<?php
 									}
 								}else{
@@ -73,7 +73,7 @@
 						        		<span>rated:</span>
                                         <?php
                                         $review=$this->Rental_model->getSingleUserCarReview($item['car_id'],$this->session->username);
-										if($review['customer_id'] != ""){
+										if($review){
 											for($x=0;$x<$review['star_rate'];$x++){
 											?>                                        
 											<span class="ion-ios-star"></span>

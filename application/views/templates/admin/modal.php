@@ -152,3 +152,27 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ConfirmBooking" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <?=form_open(base_url()."confirm_booking");?>
+            <input type="hidden" name="id" id="book_id">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Confirm Booking</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">                
+                <div class="form-group">
+                    <label>Remarks</label>
+                    <textarea name="remarks" class="form-control" rows="4" required></textarea>
+                </div>                                
+            </div>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <?=form_close();?>
+        </div>
+    </div>
+</div>

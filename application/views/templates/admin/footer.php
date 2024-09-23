@@ -97,6 +97,10 @@
         var id=$(this).data('id');
         document.getElementById('car_image_id').value = id;
       });
+      $('.confirmBooking').click(function(){
+        var id=$(this).data('id');
+        document.getElementById('book_id').value = id;
+      });
     </script>
   </body>
 </html>
