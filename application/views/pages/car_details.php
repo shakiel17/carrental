@@ -192,10 +192,15 @@ if($check->num_rows()>0){
 							   			<div class="rating-wrap">
 								   			<h3 class="head">Give a Review</h3>
 											   <?php
+											   $check=$this->Rental_model->db->query("SELECT * FROM reviews WHERE car_id='$id' AND customer_id='".$this->session->username."'");
+											   if($check->num_rows() > 0){
+
+											   }else{
 										if($this->session->user_login){
 									?>
                         <div class="rating">
                           <?=form_open(base_url()."save_review");?>
+						  <input type="hidden" name="id" value="<?=$id;?>">
                           <div class="form-group">
                             <label>Details</label>
                             <textarea class="form-control" name="details"></textarea>
@@ -245,11 +250,29 @@ if($check->num_rows()>0){
                           <?=form_close();?>
                         </div>
 						<?php
-										}else{
+										}										
+										else{
 											?>
 											<a href="<?=base_url();?>user_login/view_car_details/<?=$id;?>" class="btn btn-primary">Login</a>
 											<?php
 										}
+									}
+
+									$rate5=$this->Rental_model->db->query("SELECT * FROM reviews WHERE star_rate='5' AND car_id='$id'");
+									$rate4=$this->Rental_model->db->query("SELECT * FROM reviews WHERE star_rate='4' AND car_id='$id'");
+									$rate3=$this->Rental_model->db->query("SELECT * FROM reviews WHERE star_rate='3' AND car_id='$id'");
+									$rate2=$this->Rental_model->db->query("SELECT * FROM reviews WHERE star_rate='2' AND car_id='$id'");
+									$rate1=$this->Rental_model->db->query("SELECT * FROM reviews WHERE star_rate='1' AND car_id='$id'");
+									$r5=$rate5->num_rows();
+									$r4=$rate4->num_rows();
+									$r3=$rate3->num_rows();
+									$r2=$rate2->num_rows();
+									$r1=$rate1->num_rows();
+									$per5 = ($r5/count($reviews))*100;
+									$per4 = ($r4/count($reviews))*100;
+									$per3 = ($r3/count($reviews))*100;
+									$per2 = ($r2/count($reviews))*100;
+									$per1 = ($r1/count($reviews))*100;
 									?>
 								   			<div class="wrap">
 									   			<p class="star">
@@ -259,9 +282,9 @@ if($check->num_rows()>0){
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
-									   					(98%)
+									   					(<?=$per5;?>%)
 								   					</span>
-								   					<span>20 Reviews</span>
+								   					<span><?=$r5;?> Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
@@ -270,9 +293,9 @@ if($check->num_rows()>0){
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					
-									   					(85%)
+									   					(<?=$per4;?>%)
 								   					</span>
-								   					<span>10 Reviews</span>
+								   					<span><?=$r4;?> Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
@@ -280,26 +303,26 @@ if($check->num_rows()>0){
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					
-									   					(70%)
+									   					(<?=$per3;?>%)
 								   					</span>
-								   					<span>5 Reviews</span>
+								   					<span><?=$r3;?> Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
 									   					<i class="ion-ios-star"></i>
 									   					<i class="ion-ios-star"></i>
 									   					
-									   					(10%)
+									   					(<?=$per2;?>%)
 								   					</span>
-								   					<span>0 Reviews</span>
+								   					<span><?=$r2;?> Reviews</span>
 									   			</p>
 									   			<p class="star">
 									   				<span>
 									   					<i class="ion-ios-star"></i>
 									   					
-									   					(0%)
+									   					(<?=$per1;?>%)
 								   					</span>
-								   					<span>0 Reviews</span>
+								   					<span><?=$r1;?> Reviews</span>
 									   			</p>
 									   		</div>
 								   		</div>

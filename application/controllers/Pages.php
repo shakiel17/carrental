@@ -356,6 +356,27 @@ Thank you for your support and we will be glad if you come back and rent again."
             }
             redirect(base_url()."manage_bookings");            
         }
+        public function check_availability(){
+            $car=$this->input->post('car');
+            $startdate=$this->input->post('startdate');
+            $enddate=$this->input->post('enddate');
+            $check=$this->Rental_model->check_availability($car,$startdate,$enddate);
+            if($check){                
+                $this->session->set_flashdata('failed','This unit is NOT available!');
+            }else{
+                $this->session->set_flashdata('success','This unit is available!');                
+            }
+            redirect(base_url());
+        }
+        public function save_review(){
+            $id=$this->input->post('id');
+            $save=$this->Rental_model->save_review();
+            if($save){
+                echo "<script type='text/javascript'>alert('Review successfully posted!');window.location='".base_url()."view_car_details/$id';</script>";
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to submit review!');window.location='".base_url()."view_car_details/$id';</script>";
+            }
+        }
         //=================================Start of Admin Modules================================
         public function admin(){
             $page = "index";

@@ -8,7 +8,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item <?=$home;?>"><a href="<?=base_url();?>" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>	          
+	          <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>	           -->
 	          <li class="nav-item <?=$car;?>"><a href="<?=base_url();?>cars" class="nav-link">Cars</a></li>
               <?php
               if($this->session->user_login){

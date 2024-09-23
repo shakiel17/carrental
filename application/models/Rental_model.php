@@ -269,5 +269,28 @@
                 return false;
             }
         }
+        public function check_availability($car,$startdate,$enddate){
+            $result=$this->db->query("SELECT * FROM booking WHERE car_id='$car' AND (date_started BETWEEN '$startdate' AND '$enddate' OR date_return BETWEEN '$startdate' AND '$enddate') AND `status`='booked'");
+            if($result->num_rows() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_review(){
+            $id=$this->input->post('id');
+            $details=$this->input->post('details');
+            $rating=$this->input->post('rating');
+            $username=$this->session->username;
+            $fullname=$this->session->fullname;
+            $date=date('Y-m-d');
+            $time=date('H:i:s');
+            $result=$this->db->query("INSERT INTO reviews(car_id,customer_id,fullname,star_rate,details,datearray,timearray) VALUES('$id','$username','$fullname','$rating','$details','$date','$time')");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

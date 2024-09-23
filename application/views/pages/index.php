@@ -30,35 +30,50 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
-		          		<h2>Make your trip</h2>
-			    				<div class="form-group">
-			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
+                
+                <?=form_open(base_url()."check_availability",array('class' => 'request-form ftco-animate bg-primary'));?>
+	  						<!-- <form action="#" class="request-form ftco-animate bg-primary"> -->
+		          		<h2>Check Availability</h2>			    				
 			    				<div class="d-flex">
 			    					<div class="form-group mr-2">
-			                <label for="" class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+			                <label for="" class="label">Date Start</label>
+			                <input type="date" class="form-control" placeholder="Date" name="startdate">
 			              </div>
 			              <div class="form-group ml-2">
-			                <label for="" class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+			                <label for="" class="label">Date Return</label>
+			                <input type="date" class="form-control" placeholder="Date" name="enddate">
 			              </div>
 		              </div>
 		              <div class="form-group">
-		                <label for="" class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
+		                <label for="" class="label">Select Car</label>
+		                <select name="car" class="form-control" required>
+                      <option value="">Select Car</option>
+                      <?php
+                      $cars=$this->Rental_model->getAllCars();
+                      foreach($cars as $item){
+                        echo "<option value='$item[id]'>$item[description]</option>";
+                      }
+                      ?>
+                    </select>
 		              </div>
 			            <div class="form-group">
-			              <a href="<?=base_url();?>cars" type="button" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">Rent A Car Now</a>
+			              <input type="submit" value="Check Availability" class="btn btn-secondary py-3 px-4"><br>
+                    <?php
+                    if($this->session->success){
+                    ?>
+                    <div class="badge badge-success"><?=$this->session->success;?></div>
+                    <?php
+                    }
+                    if($this->session->failed){
+                      ?>
+                    <div class="badge badge-danger"><?=$this->session->failed;?></div>
+                    <?php
+                    }
+                    ?>
 			            </div>
-			    			</form>
-	  					</div>
+                  <?=form_close();?>
+			    			<!-- </form> -->                 
+	  					</div>              
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
 	  							<h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
