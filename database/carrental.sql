@@ -1,6 +1,6 @@
 /*
-SQLyog Community v13.1.6 (64 bit)
-MySQL - 10.1.38-MariaDB : Database - carrental
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 10.4.32-MariaDB : Database - carrental
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 10.1.38-MariaDB : Database - carrental
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`carrental` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`carrental` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `carrental`;
 
@@ -26,7 +26,7 @@ CREATE TABLE `admin` (
   `password` varchar(100) DEFAULT NULL,
   `fullname` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `agreement` */
 
@@ -37,7 +37,7 @@ CREATE TABLE `agreement` (
   `datearray` date DEFAULT NULL,
   `rented_by` varchar(100) DEFAULT NULL,
   `contactno` varchar(100) DEFAULT NULL,
-  `address` text,
+  `address` text DEFAULT NULL,
   `car_id` int(11) DEFAULT NULL,
   `odometer` varchar(100) DEFAULT NULL,
   `fuel_type` varchar(100) DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `agreement` (
   `time_return` time DEFAULT NULL,
   `signature` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `booking` */
 
@@ -70,10 +70,10 @@ CREATE TABLE `booking` (
   `status` varchar(100) DEFAULT 'pending',
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
-  `proof_of_payment` varchar(100) DEFAULT NULL,
+  `proof_of_payment` longblob DEFAULT NULL,
   `payment_type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `cars` */
 
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `cars`;
 
 CREATE TABLE `cars` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
-  `description` text,
+  `description` text DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL,
   `fuel_type` varchar(100) DEFAULT NULL,
   `trans_type` varchar(100) DEFAULT NULL,
@@ -89,9 +89,9 @@ CREATE TABLE `cars` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   `status` varchar(100) DEFAULT 'available',
-  `image` longblob,
+  `image` longblob DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `cartype` */
 
@@ -101,7 +101,7 @@ CREATE TABLE `cartype` (
   `id` int(45) NOT NULL AUTO_INCREMENT,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `customer` */
 
@@ -112,17 +112,18 @@ CREATE TABLE `customer` (
   `lastname` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
   `middlename` varchar(100) DEFAULT NULL,
-  `address` text,
+  `address` text DEFAULT NULL,
   `contactno` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `facebook` varchar(100) DEFAULT NULL,
-  `valid_id_1` longblob,
-  `valid_id_2` longblob,
-  `proof_of_address` longblob,
+  `valid_id_1` longblob DEFAULT NULL,
+  `valid_id_2` longblob DEFAULT NULL,
+  `proof_of_address` longblob DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `reviews` */
 
@@ -134,11 +135,11 @@ CREATE TABLE `reviews` (
   `customer_id` varchar(100) DEFAULT NULL,
   `fullname` varchar(100) DEFAULT NULL,
   `star_rate` int(11) DEFAULT NULL,
-  `details` text,
+  `details` text DEFAULT NULL,
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `users` */
 
@@ -152,7 +153,7 @@ CREATE TABLE `users` (
   `datearray` date DEFAULT NULL,
   `timearray` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
