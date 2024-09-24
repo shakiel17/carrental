@@ -268,11 +268,19 @@ if($check->num_rows()>0){
 									$r3=$rate3->num_rows();
 									$r2=$rate2->num_rows();
 									$r1=$rate1->num_rows();
-									$per5 = ($r5/count($reviews))*100;
-									$per4 = ($r4/count($reviews))*100;
-									$per3 = ($r3/count($reviews))*100;
-									$per2 = ($r2/count($reviews))*100;
-									$per1 = ($r1/count($reviews))*100;
+									if(count($reviews) > 0){
+										$per5 = ($r5/count($reviews))*100;
+										$per4 = ($r4/count($reviews))*100;
+										$per3 = ($r3/count($reviews))*100;
+										$per2 = ($r2/count($reviews))*100;
+										$per1 = ($r1/count($reviews))*100;
+									}else{
+										$per5 = 0;
+										$per4 = 0;
+										$per3 = 0;
+										$per2 = 0;
+										$per1 = 0;
+									}																		
 									?>
 								   			<div class="wrap">
 									   			<p class="star">
