@@ -85,6 +85,7 @@
                                                     <?php
                                                     if($item['status']=="booked"){
                                                         ?>
+                                                        <a href="<?=base_url();?>manage_agreement/<?=$item['id'];?>"><span class="badge badge-warning text-white">Agreement</span></a>
                                                         <a href="<?=base_url();?>complete_booking/<?=$item['id'];?>" onclick="return confirm('Do you wish to comnplete this booking?');return false;"><span class="badge badge-info text-white">Complete</span></a>
                                                         <?php
                                                     }

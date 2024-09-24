@@ -215,6 +215,10 @@
             $result=$this->db->query("SELECT c.email FROM customer c INNER JOIN booking b ON b.customer_id=c.username WHERE b.id='$id'");
             return $result->row_array();
         }
+        public function getUserEmailAdd($username){
+            $result=$this->db->query("SELECT * FROM customer WHERE username='$username'");
+            return $result->row_array();
+        }
         public function cancel_booking($id){
             $result=$this->db->query("UPDATE booking SET `status`='cancel' WHERE id='$id'");
             if($result){

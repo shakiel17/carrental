@@ -57,6 +57,9 @@
 								}else{
 									echo "Payment Type: ".$item['payment_type']."<br>";
 								}
+								?>
+								<a href="<?=base_url();?>view_agreement/<?=$this->session->username;?>/<?=$item['id'];?>" class="btn btn-warning btn-sm" target="_blank">Agreement</a>
+								<?php
 								if($item['status']=="pending"){
 									?>
 									<a href="<?=base_url();?>cancel_user_booking/<?=$item['id'];?>" class="btn btn-sm btn-danger mt-1" onclick="return confirm('Do you wish to cancel this booking?');return false;"><i class="ion-ios-trash"></i> Cancel</a>

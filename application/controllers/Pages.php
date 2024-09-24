@@ -199,12 +199,45 @@
         }
         public function book_save(){
             $id=$this->input->post('car_id');
-            $book=$this->Rental_model->book_save();
-            if($book){
-                echo "<script type='text/javascript'>alert('Booking Successfully saved!');window.location='".base_url()."user_bookings';</script>";
+            $startdate=$this->input->post('date_start');
+            $enddate=$this->input->post('date_return');
+            $check=$this->Rental_model->check_availability($id,$startdate,$enddate);
+            if($check){
+                echo "<script type='text/javascript'>alert('Unable to save booking! Unit is not available on your preferred date!');window.location='".base_url()."car_booking/$id';</script>";
             }else{
-                echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
-            }
+                
+                    $message="Hello,
+            
+Thank you for booking with us. Please wait a few moment for the administrator to review your booking details.
+            
+God Bless you always.";
+                    $prof=$this->Rental_model->getUserEmailAdd($this->session->username);
+                    $email=$prof['email'];
+                    $config = array(
+                        'protocol' => 'smtp',
+                        'smtp_host' => 'ssl://smtp.googlemail.com',
+                        'smtp_port' => 465,
+                        'smtp_user' => 'easykill.aboy@gmail.com',
+                        'smtp_pass' => 'ngfpdqyrfvoffhur',
+                        'mailtype' => 'text',
+                        'charset' => 'iso-8859-1',
+                        'wordwrap' => TRUE
+                    );
+                    $this->load->library('email',$config);
+                    $this->email->set_newline("\r\n");
+                    $this->email->from('DOM Car Rental');
+                    $this->email->to($email);
+                    $this->email->subject('Booking Success!');
+                    $this->email->message($message);
+                    // $this->email->send();
+                    // $this->email->print_debugger();
+                    if($this->email->send()){
+                        $book=$this->Rental_model->book_save();
+                        echo "<script type='text/javascript'>alert('Booking Successfully saved! We sent you a confirmation email for your reference. Thank you!');window.location='".base_url()."user_bookings';</script>";
+                    }else{
+                        echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
+                    }                   
+            }            
         }
         public function cancel_user_booking($id){
             $cancel=$this->Rental_model->cancel_booking($id);
@@ -229,8 +262,8 @@ Thank you.";
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_port' => 465,
-                'smtp_user' => 'acitsolutions17@gmail.com',
-                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'smtp_user' => 'easykill.aboy@gmail.com',
+                'smtp_pass' => 'ngfpdqyrfvoffhur',
                 'mailtype' => 'text',
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
@@ -301,8 +334,8 @@ Thank you.";
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_port' => 465,
-                'smtp_user' => 'acitsolutions17@gmail.com',
-                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'smtp_user' => 'easykill.aboy@gmail.com',
+                'smtp_pass' => 'ngfpdqyrfvoffhur',
                 'mailtype' => 'text',
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
@@ -334,8 +367,8 @@ Thank you for your support and we will be glad if you come back and rent again."
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_port' => 465,
-                'smtp_user' => 'acitsolutions17@gmail.com',
-                'smtp_pass' => 'bdzhgzicrnghkikk',
+                'smtp_user' => 'easykill.aboy@gmail.com',
+                'smtp_pass' => 'ngfpdqyrfvoffhur',
                 'mailtype' => 'text',
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
