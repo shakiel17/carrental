@@ -51,6 +51,7 @@ CREATE TABLE `agreement` (
   `date_return` date DEFAULT NULL,
   `time_return` time DEFAULT NULL,
   `signature` varchar(100) DEFAULT NULL,
+  `book_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -73,7 +74,7 @@ CREATE TABLE `booking` (
   `proof_of_payment` longblob DEFAULT NULL,
   `payment_type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `cars` */
 

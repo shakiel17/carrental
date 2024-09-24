@@ -572,6 +572,25 @@ Thank you for your support and we will be glad if you come back and rent again."
             $data['image'] = $this->Rental_model->getCar($id);
             $this->load->view('pages/admin/'.$page,$data);
         }
+
+        public function manage_agreement($id){
+            $page = "manage_agreement";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }                        
+            $data['id'] = $id;
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
+        }
         //=================================End of Admin Modules================================
     }
 ?>
