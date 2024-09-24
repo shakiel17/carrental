@@ -16,9 +16,26 @@
                 </div> -->
               </div>
             </div>
-
+            <?php
+            $query = $this->Rental_model->db->query("SELECT * FROM booking WHERE id='$id'");
+            $book=$query->row_array();
+            $username=$book['customer_id'];
+            $car_id=$book['car_id'];
+            $destination=$book['destination'];
+            $datestart=date('m/d/Y',strtotime($book['date_started']))." ".date('h:i A',strtotime($book['time_started']));
+            $datereturn=date('m/d/Y',strtotime($book['date_return']))." ".date('h:i A',strtotime($book['time_return']));
+            $query2 = $this->Rental_model->db->query("SELECT * FROM customer WHERE username='$username'");
+            $user=$query2->row_array();
+            $name=$user['lastname'].", ".$user['firstname']." ".$user['middlename'];
+            $address=$user['address'];
+            $contactno=$user['contactno'];
+            $query3 = $this->Rental_model->db->query("SELECT * FROM cars WHERE id='$car_id'");
+            $car=$query3->row_array();
+            $vehicle=$car['description'];
+            $car_rate=$car['amount'];
+            ?>
             <div class="clearfix"></div>
-
+            <?=form_open_multipart(base_url()."save_agreement");?>
             <div class="row">
               <div class="col-md-9 col-sm-12  ">
                 <div class="x_panel">
@@ -73,8 +90,8 @@
                         </tr>
                         <tr>
                             <td colspan="2" align="justify">
-                                This Car Rental Agreement made and entered this <input type='text' name="day" style="width:50px;border:0;border-bottom:1px solid black;text-align:center;"> day of <input type='text' name="month" style="width:150px;border:0;border-bottom:1px solid black;text-align:center;"> executed by and between Mr./Mrs./Ms. <input type='text' name="renter" style="width:200px;border:0;border-bottom:1px solid black;text-align:center;"> (Renter) with contact number <input type='text' name="contactno" style="width:150px;border:0;border-bottom:1px solid black;text-align:center;">
-                                with an address of <input type='text' name="address" style="width:300px;border:0;border-bottom:1px solid black;text-align:center;"> (renter) and DOM RENT A CAR KIDAPAWAN CAR RENTAL SERVICES (company) with an address of 2398 Villamarzo Street, Kidapawan City.
+                                This Car Rental Agreement made and entered this <input type='text' name="day" style="width:50px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=date('d');?>"> day of <input type='text' name="month" style="width:150px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=date('F');?>"> executed by and between Mr./Mrs./Ms. <input type='text' name="renter" style="width:250px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=$name;?>"> (Renter) with contact number <input type='text' name="contactno" style="width:150px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=$contactno;?>">
+                                with an address of <input type='text' name="address" style="width:300px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=$address;?>"> (renter) and DOM RENT A CAR KIDAPAWAN CAR RENTAL SERVICES (company) with an address of 2398 Villamarzo Street, Kidapawan City.
                             </td>
                         </tr>
                         <tr>
@@ -89,7 +106,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <b>VEHICLE: <input type='text' name="vehicle" style="width:200px;border:0;border-bottom:1px solid black;">
+                                <b>VEHICLE: <input type='text' name="vehicle" style="width:200px;border:0;border-bottom:1px solid black;" value="<?=$vehicle;?>">
                             </td>
                             <td>
                                 <b>ODOMETER: <input type='text' name="odometer" style="width:100px;border:0;border-bottom:1px solid black;">
@@ -105,10 +122,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <b>DESTINATION: <input type='text' name="destination" style="width:200px;border:0;border-bottom:1px solid black;">
+                                <b>DESTINATION: <input type='text' name="destination" style="width:200px;border:0;border-bottom:1px solid black;" value="<?=$destination;?>">
                             </td>
                             <td>
-                                <b>RATE: <input type='text' name="rate" style="width:100px;border:0;border-bottom:1px solid black;">
+                                <b>RATE: <input type='text' name="rate" style="width:100px;border:0;border-bottom:1px solid black;" value="<?=$car_rate;?>">
                             </td>
                         </tr>
 
@@ -119,12 +136,22 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <b>TERMS of PAYMENT</b>
+                                <b>TERMS OF PAYMENT</b>
                             </td>
                         </tr>
+                        <?php
+                        $gcash="____";
+                        $cash="____";
+                        if($book['payment_type']=="GCash"){
+                            $gcash="<u> &nbsp;&check;&nbsp; </u> ";
+                        }
+                        if($book['payment_type']=="Cash"){
+                            $cash="<u> &nbsp;&check;&nbsp;  </u> ";
+                        }
+                        ?>
                         <tr>
                             <td colspan="2">
-                                <b>CASH:____ GCASH:____ WASHING: <input type='text' name="washing" style="width:50px;border:0;border-bottom:1px solid black;"> 
+                                <b>CASH: <?=$cash;?> GCASH:<?=$gcash;?> WASHING: <input type='text' name="washing" style="width:50px;border:0;border-bottom:1px solid black;"> 
                             </td>                            
                         </tr>
 
@@ -151,7 +178,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <b>DATE AND TIME STARTED: <input type='text' name="datetimestarted" style="width:200px;border:0;border-bottom:1px solid black;"> DATE AND TIME RETURNED: <input type='text' name="datetimereturned" style="width:200px;border:0;border-bottom:1px solid black;"></b>
+                                <b>DATE AND TIME STARTED: <input type='text' name="datetimestarted" style="width:200px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=$datestart;?>"> DATE AND TIME RETURNED: <input type='text' name="datetimereturned" style="width:200px;border:0;border-bottom:1px solid black;text-align:center;" value="<?=$datereturn;?>"></b>
                             </td>                            
                         </tr>
 
@@ -322,6 +349,11 @@
                         </tr>
                         <tr>
                             <td colspan="2" align="center">
+                                <input type="submit" name="submit" class="btn btn-primary" value="Save Agreement">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
                                 &nbsp;
                             </td>
                         </tr>
@@ -330,5 +362,6 @@
                 </div>
               </div>
             </div>
+            <?=form_close();?>
           </div>
         </div>
