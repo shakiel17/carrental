@@ -38,8 +38,9 @@ CREATE TABLE `agreement` (
   `rented_by` varchar(100) DEFAULT NULL,
   `contactno` varchar(100) DEFAULT NULL,
   `address` text DEFAULT NULL,
-  `car_id` int(11) DEFAULT NULL,
+  `car_id` varchar(100) DEFAULT NULL,
   `odometer` varchar(100) DEFAULT NULL,
+  `plateno` varchar(100) DEFAULT NULL,
   `fuel_type` varchar(100) DEFAULT NULL,
   `destination` varchar(100) DEFAULT NULL,
   `rate` double DEFAULT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE `agreement` (
   `signature` varchar(100) DEFAULT NULL,
   `book_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*Table structure for table `booking` */
 

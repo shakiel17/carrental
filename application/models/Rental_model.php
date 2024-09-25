@@ -296,5 +296,40 @@
                 return false;
             }
         }
+        public function save_agreement(){
+            $book_id=$this->input->post('book_id');
+            $date_rented=$this->input->post('date_rented');
+            $date_return=$this->input->post('date_return');
+            $time_rented=$this->input->post('time_rented');
+            $time_return=$this->input->post('time_return');
+            $signedday=$this->input->post('signedday');
+            $signedmonth=date('m',strtotime($this->input->post('signedmonth')));
+            $signedyear=$this->input->post('signedyear');
+            $renter=$this->input->post('renter');
+            $contactno=$this->input->post('contactno');
+            $address=$this->input->post('address');
+            $vehicle=$this->input->post('vehicle');
+            $odometer=$this->input->post('odometer');
+            $fuel=$this->input->post('fuel');
+            $plateno=$this->input->post('plateno');
+            $destination=$this->input->post('destination');
+            $rate=$this->input->post('rate');
+            $payment_terms=$this->input->post('payment_terms');
+            $washing=$this->input->post('washing');
+            $tendered=$this->input->post('tendered');
+            $datearray=$signedyear."-".$signedmonth."-".$signedday;
+            $plateno=$this->input->post('plateno');
+            $check=$this->db->query("SELECT * FROM agreement WHERE book_id='$book_id'");
+            if($check->num_rows() > 0){
+                $result=$this->db->query("UPDATE agreement SET datearray='$datearray',rented_by='$renter',contactno='$contactno',`address`='$address',car_id='$vehicle',odometer='$odometer',fuel_type='$fuel',destination='$destination',rate='$rate',payment_terms='$payment_terms',washing='$washing',totalamount='$tendered',date_rented='$date_rented',time_rented='$time_rented',date_return='$date_return',time_return='$time_return',plateno='$plateno' WHERE book_id='$book_id'");
+            }else{
+                $result=$this->db->query("INSERT INTO agreement(datearray,rented_by,contactno,`address`,car_id,odometer,fuel_type,destination,rate,payment_terms,washing,totalamount,date_rented,time_rented,date_return,time_return,book_id,plateno) VALUES('$datearray','$renter','$contactno','$address','$vehicle','$odometer','$fuel','$destination','$rate','$payment_terms','$washing','$tendered','$date_rented','$time_rented','$date_return','$time_return','$book_id','$plateno')");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

@@ -58,7 +58,7 @@
 									echo "Payment Type: ".$item['payment_type']."<br>";
 								}
 								?>
-								<a href="<?=base_url();?>view_agreement/<?=$this->session->username;?>/<?=$item['id'];?>" class="btn btn-warning btn-sm" target="_blank">Agreement</a>
+								<a href="<?=base_url();?>print_agreement/<?=$item['id'];?>" class="btn btn-warning btn-sm" target="_blank">Agreement</a><br>
 								<?php
 								if($item['status']=="pending"){
 									?>

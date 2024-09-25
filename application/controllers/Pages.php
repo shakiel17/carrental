@@ -591,6 +591,30 @@ Thank you for your support and we will be glad if you come back and rent again."
             $this->load->view('templates/admin/modal'); 
             $this->load->view('templates/admin/footer');       
         }
+        public function save_agreement(){       
+            $id=$this->input->post('book_id');
+            $save=$this->Rental_model->save_agreement();
+            if($save){
+                echo "<script>alert('Agreement details successfully saved!');</script>";
+            }else{
+                echo "<script>alert('Unable to save agreement details!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_agreement/$id';</script>";
+        }
+        public function print_agreement($id){
+            $page = "print_agreement";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+                                
+            $data['id'] = $id;
+            // $this->load->view('templates/admin/header');            
+            // $this->load->view('templates/admin/sidebar');
+            // $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            // $this->load->view('templates/admin/modal'); 
+            // $this->load->view('templates/admin/footer');       
+        }
         //=================================End of Admin Modules================================
     }
 ?>

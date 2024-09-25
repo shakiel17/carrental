@@ -1,22 +1,6 @@
-<div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Rental Agreement</h3>
-              </div>
-
-              <div class="title_right">
-                <!-- <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div> -->
-              </div>
-            </div>
-            <?php
+           <center>
+           <div style="width:816px;">
+           <?php
             $name="";
             $address="";
             $datestart="";
@@ -89,33 +73,14 @@
                 $date_return=$book['date_return'];
                 $time_return=$book['time_return'];
             }            
-            ?>
-            <div class="clearfix"></div>
+            ?>            
             <?=form_open_multipart(base_url()."save_agreement");?>
             <input type="hidden" name="date_rented" value="<?=$date_start;?>">
             <input type="hidden" name="date_return" value="<?=$date_return;?>">
             <input type="hidden" name="time_rented" value="<?=$time_start;?>">
             <input type="hidden" name="time_return" value="<?=$time_return;?>">
             <input type="hidden" name="book_id" value="<?=$id;?>">
-            <input type="hidden" name="payment_terms" value="<?=$payment_terms;?>">
-            <div class="row">
-              <div class="col-md-9 col-sm-12  ">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <!-- <h2>Plain Page</h2> -->
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
+            <input type="hidden" name="payment_terms" value="<?=$payment_terms;?>">                                
                     <table width="100%" border="0">
                         <tr>
                             <td align="center">
@@ -130,11 +95,8 @@
                             </td>                            
                         </tr>
                     </table>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br>
-                     <table width="100%" border="0">
+                    ------------------------------------------------------------------------------------------------------------------------------------------------------------
+                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td colspan="2" align="center">
                                 <b>RENTAL AGREEMENT</b>
@@ -353,6 +315,7 @@
                                 </i>
                             </td>                            
                         </tr>
+                        
                         <tr>
                             <td colspan="2">
                                 <b>RELEASE OF LIABILITY:</b>
@@ -408,22 +371,7 @@
                             <td colspan="2">
                                 <i>Name and Signature (renter)</i>
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <input type="submit" name="submit" class="btn btn-primary" value="Save Agreement"> <a href="<?=base_url();?>print_agreement/<?=$id;?>" class="btn btn-info" target="_blank">Print</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                &nbsp;
-                            </td>
-                        </tr>
-                     </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <?=form_close();?>
-          </div>
-        </div>
+                        </tr>                        
+                    </table>                
+                    <div>
+                        <center>
