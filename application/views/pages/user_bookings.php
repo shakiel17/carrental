@@ -95,7 +95,7 @@
 						        	</p>
 						        </td>
 						        
-						        <td class="price">
+						        <td>
                                     <p class="label"><?=$item['destination'];?></p>						        	
 						        </td>
 						        <?php
@@ -105,11 +105,11 @@
 									$inc_date=date('F d, Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."<br>".date('F d, Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']));
 								}
 								?>
-						        <td class="price">
+						        <td >
 						        	<p class="label"><?=$inc_date;?></p>
 						        </td>
 
-						        <td class="price">
+						        <td >
 						        	<p class="label"><?=date('m/d/Y',strtotime($item['datearray']));?> <?=date('h:i A',strtotime($item['timearray']));?></p>						        	
 						        </td>
 						      </tr><!-- END TR-->

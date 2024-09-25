@@ -331,5 +331,31 @@
                 return false;
             }
         }
+        public function update_profile(){
+            $id=$this->input->post('id');
+            $oldusername=$this->input->post('oldusername');
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $lastname=$this->input->post('lastname');
+            $firstname=$this->input->post('firstname');
+            $middlename=$this->input->post('middlename'); 
+            $fullname=$firstname." ".$lastname;
+            $address=$this->input->post('address');
+            $contactno=$this->input->post('contactno');
+            $email=$this->input->post('email');
+            $facebook=$this->input->post('facebook');
+            $check=$this->db->query("SELECT * FROM customer WHERE username='$username' AND id <> '$id'");
+            if($check->num_rows() > 0){
+                return false;
+            }else{
+                $result=$this->db->query("UPDATE customer SET lastname='$lastname',firstname='$firstname',middlename='$middlename',`address`='$address',contactno='$contactno',email='$email',facebook='$facebook',username='$username' WHERE id='$id'");                
+            }
+            if($result){
+                $this->db->query("UPDATE users SET username='$username',`password`='$password' WHERE username='$oldusername'");
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

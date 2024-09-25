@@ -32,7 +32,8 @@
                     <ul class="nav child_menu">
                       <li><a href="<?=base_url();?>manage_cars">Cars</a></li>
                       <li><a href="<?=base_url();?>manage_car_type">Car Type</a></li>
-                      <li><a href="<?=base_url();?>chat_support">Chat Support</a></li>                      
+                      <!-- <li><a href="<?=base_url();?>chat_support">Chat Support</a></li>                       -->
+                      <li><a href="<?=base_url();?>track_vehicle">Monitor Vehicle</a></li>
                     </ul>
                   </li>                                    
                 </ul>

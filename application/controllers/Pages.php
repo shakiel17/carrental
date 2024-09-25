@@ -19,6 +19,7 @@
             $data['car'] = '';       
             $data['login'] = '';  
             $data['booking'] = '';   
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -40,6 +41,7 @@
             $data['type'] = "";
             $data['login'] = '';
             $data['booking'] = '';
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -62,6 +64,7 @@
             $data['login'] = '';
             $data['booking'] = '';
             $data['id'] = $id;
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -83,6 +86,7 @@
             $data['type'] = $type;
             $data['login'] = '';
             $data['booking'] = '';
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -101,7 +105,8 @@
             $data['car'] = '';
             $data['login'] = 'active';
             $data['location'] = $loc;            
-            $data['id'] = $id;
+            $data['id'] = $id;      
+            $data['profile'] = '';      
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -167,6 +172,7 @@
             $data['type'] = '';
             $data['login'] = '';
             $data['booking'] = 'active';
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -191,6 +197,7 @@
             $data['login'] = '';
             $data['booking'] = '';
             $data['id'] = $id;
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -298,6 +305,7 @@ Thank you.";
             $data['type'] = '';
             $data['login'] = '';
             $data['booking'] = 'active';
+            $data['profile'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -408,6 +416,41 @@ Thank you for your support and we will be glad if you come back and rent again."
                 echo "<script type='text/javascript'>alert('Review successfully posted!');window.location='".base_url()."view_car_details/$id';</script>";
             }else{
                 echo "<script type='text/javascript'>alert('Unable to submit review!');window.location='".base_url()."view_car_details/$id';</script>";
+            }
+        }
+        public function user_profile(){
+            $page = "user_profile";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }               
+            $data['user'] = $this->Rental_model->getUserEmailAdd($this->session->username);
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['profile'] = 'active';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function update_profile(){            
+            $oldusername=$this->input->post('oldusername');
+            $username=$this->input->post('username');            
+            $save=$this->Rental_model->update_profile();
+            if($save){
+                if($oldusername <> $username){
+                    echo "<script type='text/javascript'>alert('Profile successfully updated! Please relogin now.');window.location='".base_url()."user_logout';</script>";                    
+                }else{
+                    echo "<script type='text/javascript'>alert('Profile successfully updated!');window.location='".base_url()."user_profile';</script>";
+                }               
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to update profile!');window.location='".base_url()."user_profile';</script>";
             }
         }
         //=================================Start of Admin Modules================================
@@ -614,6 +657,19 @@ Thank you for your support and we will be glad if you come back and rent again."
             $this->load->view('pages/admin/'.$page,$data);     
             // $this->load->view('templates/admin/modal'); 
             // $this->load->view('templates/admin/footer');       
+        }
+        public function track_vehicle(){
+            $page = "monitor_vehicle";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            $data['src'] = "https://www.sinotrack.com/";
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
         }
         //=================================End of Admin Modules================================
     }
