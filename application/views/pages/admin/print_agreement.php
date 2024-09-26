@@ -2,6 +2,7 @@
            <div style="width:816px;">
            <?php
             $name="";
+            $fullname="";
             $address="";
             $datestart="";
             $datereturn="";
@@ -18,6 +19,7 @@
             $fuel="";
             $destination="";            
             $payment_terms="";
+            $washing="";
             $tendered="";
             $queryMain=$this->Rental_model->db->query("SELECT * FROM agreement WHERE book_id='$id'");
             if($queryMain->num_rows() > 0){
@@ -72,6 +74,7 @@
                 $time_start=$book['time_started'];
                 $date_return=$book['date_return'];
                 $time_return=$book['time_return'];
+               
             }            
             ?>            
             <?=form_open_multipart(base_url()."save_agreement");?>
@@ -364,7 +367,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                _______________________________________
+                                <u><?=$name;?></u>
                             </td>
                         </tr>
                         <tr>

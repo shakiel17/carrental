@@ -357,5 +357,27 @@
                 return false;
             }
         }
+
+        public function save_signature(){
+            $id=$this->input->post('id');
+            $fileName=$this->input->post('file');             
+            $filetype=explode(';base64,',$fileName);
+            $filetype_aux=explode('image/',$filetype[0]);
+            //$fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($filetype_aux[1], PATHINFO_EXTENSION);            
+            //$allowTypes = array('jpg','png','jpeg','gif');
+            //if(in_array($fileType,$allowTypes)){
+                //$image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($fileName));
+                $result=$this->db->query("UPDATE agreement SET `signature`='$imgContent' WHERE id='$id'");            
+            // }else{
+            //     return false;
+            // }            
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

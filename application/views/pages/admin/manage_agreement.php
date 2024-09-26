@@ -35,6 +35,8 @@
             $destination="";            
             $payment_terms="";
             $tendered="";
+            $washing="";
+            $signature="";
             $queryMain=$this->Rental_model->db->query("SELECT * FROM agreement WHERE book_id='$id'");
             if($queryMain->num_rows() > 0){
                 $item=$queryMain->row_array();
@@ -61,6 +63,7 @@
                 $time_start=$item['time_rented'];
                 $date_return=$item['date_return'];
                 $time_return=$item['time_return'];
+                $signature=$item['signature'];
             }else{
                 $query = $this->Rental_model->db->query("SELECT * FROM booking WHERE id='$id'");
                 $book=$query->row_array();
@@ -395,13 +398,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="center">
-                                &nbsp;
+                            <td colspan="2" style="padding-left:25px;">                            
+                                <a href="<?=base_url();?>signature/<?=$id;?>"><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($signature);?>" width="100" height="50"></a>
                             </td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <td colspan="2">
-                                _______________________________________
+                                <u><?=$name;?></u>
                             </td>
                         </tr>
                         <tr>
@@ -427,3 +430,5 @@
             <?=form_close();?>
           </div>
         </div>
+
+        
