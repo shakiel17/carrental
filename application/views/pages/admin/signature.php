@@ -21,7 +21,7 @@ $(function() {
 		var disable = $(this).text() === 'Save';
 		$(this).text(disable ? 'Edit' : 'Save');
 		sig.signature(disable ? 'disable' : 'enable');
-        var data = sig.signature('toDataURL','signature.png');
+        var data = sig.signature('toDataURL');
 		document.getElementById("result").value = data;
 	});
 	$('#clear').click(function() {
@@ -53,7 +53,7 @@ $(function() {
     <button id="clear" type="button">Clear</button> 
     <button type="submit" name="submit">Submit</button>
 </p>
-<input type="hidden" id="result" style="display:block;" name="file">
+<textarea id="result" name="file" rows="4" cols="100"></textarea>
 <?=form_close();?>
 </body>
 </html>

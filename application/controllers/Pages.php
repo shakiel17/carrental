@@ -690,11 +690,11 @@ Thank you for your support and we will be glad if you come back and rent again."
             // $this->load->view('templates/admin/footer');       
         }
         public function save_signature(){
-            $id=$this->input->post('id');
+            $id=$this->input->post('id');                        
             $save=$this->Rental_model->save_signature();
             if($save){
                 echo "<script>alert('Signature successfully saved!');</script>";
-            }else{
+            }else{                                
                 echo "<script>alert('Unable to save signature!');</script>";
             }
                 echo "<script>window.location='".base_url()."manage_agreement/$id';</script>";

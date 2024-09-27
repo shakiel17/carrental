@@ -369,7 +369,7 @@
             //if(in_array($fileType,$allowTypes)){
                 //$image = $_FILES["file"]["tmp_name"];
                 $imgContent=addslashes(file_get_contents($fileName));
-                $result=$this->db->query("UPDATE agreement SET `signature`='$imgContent' WHERE id='$id'");            
+                $result=$this->db->query("UPDATE agreement SET `signature`='$imgContent' WHERE book_id='$id'");            
             // }else{
             //     return false;
             // }            
