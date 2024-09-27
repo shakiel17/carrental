@@ -51,7 +51,7 @@ CREATE TABLE `agreement` (
   `time_rented` time DEFAULT NULL,
   `date_return` date DEFAULT NULL,
   `time_return` time DEFAULT NULL,
-  `signature` varchar(100) DEFAULT NULL,
+  `signature` longblob DEFAULT NULL,
   `book_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
