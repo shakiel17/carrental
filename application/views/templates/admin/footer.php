@@ -62,9 +62,11 @@
     <script src="<?=base_url();?>design/admin/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?=base_url();?>design/admin/vendors/pdfmake/build/vfs_fonts.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="<?=base_url();?>design/admin/build/js/custom.min.js"></script>
-
+    <script src="<?=base_url();?>design/admin/build/js/custom.min.js"></script>    
     <script>
+      function myChatSupport() {
+          window.open('<?=base_url();?>chatbot/admin', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=600,width=1000,height=750');
+      }
       $('.addCarType').click(function(){
         document.getElementById('car_type_id').value = '';
         document.getElementById('car_type_description').value = '';

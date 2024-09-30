@@ -20,6 +20,7 @@
             $data['login'] = '';  
             $data['booking'] = '';   
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -42,6 +43,7 @@
             $data['login'] = '';
             $data['booking'] = '';
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -65,6 +67,7 @@
             $data['booking'] = '';
             $data['id'] = $id;
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -87,6 +90,7 @@
             $data['login'] = '';
             $data['booking'] = '';
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -106,7 +110,8 @@
             $data['login'] = 'active';
             $data['location'] = $loc;            
             $data['id'] = $id;      
-            $data['profile'] = '';      
+            $data['profile'] = '';    
+            $data['chatbot'] = '';  
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -173,6 +178,7 @@
             $data['login'] = '';
             $data['booking'] = 'active';
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -198,6 +204,7 @@
             $data['booking'] = '';
             $data['id'] = $id;
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -306,6 +313,7 @@ Thank you.";
             $data['login'] = '';
             $data['booking'] = 'active';
             $data['profile'] = '';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -433,6 +441,7 @@ Thank you for your support and we will be glad if you come back and rent again."
             $data['login'] = '';
             $data['booking'] = '';
             $data['profile'] = 'active';
+            $data['chatbot'] = '';
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
@@ -452,6 +461,28 @@ Thank you for your support and we will be glad if you come back and rent again."
             }else{
                 echo "<script type='text/javascript'>alert('Unable to update profile!');window.location='".base_url()."user_profile';</script>";
             }
+        }
+        public function chat_bot(){
+            $page = "chatbot";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }               
+            $data['user'] = $this->Rental_model->getUserEmailAdd($this->session->username);
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['profile'] = '';
+            $data['chatbot'] = 'active';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
         }
         //=================================Start of Admin Modules================================
         public function admin(){
