@@ -42,7 +42,8 @@ $(function() {
 </script>
 </head>
 <body>
-<h1>Agreement Signature <a href="<?=base_url();?>manage_agreement/<?=$id;?>">Back</a></h1>
+	<center>
+<h1 style="margin-top:10%;">Agreement Signature <a href="<?=base_url();?>manage_agreement/<?=$id;?>">Back</a></h1>
 <div id="sig"></div>
 <p style="clear: both;">
 	<!-- <button id="disable">Save</button>  -->	
@@ -53,7 +54,8 @@ $(function() {
     <button id="clear" type="button">Clear</button> 
     <button type="submit" name="submit">Submit</button>
 </p>
-<textarea id="result" name="file" rows="4" cols="100"></textarea>
+</center>
+<textarea id="result" name="file" rows="4" cols="100" style="display:none;"></textarea>
 <?=form_close();?>
 </body>
 </html>

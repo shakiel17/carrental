@@ -126,7 +126,7 @@ if($check->num_rows()>0){
                         <label class="label">Mode of Payment</label><br>
                         <input type="radio" name="payment" value="Cash" required> <label class="label">Cash</label>&nbsp;
                         <input type="radio" name="payment" value="GCash" required> <label class="label">GCASH</label>&nbsp;
-                        <input type="radio" name="payment" value="Bank" required> <label class="label">Bank Transfer</label>
+                        <!-- <input type="radio" name="payment" value="Bank" required> <label class="label">Bank Transfer</label> -->
                     </div>
                     <div class="form-group">                                              
                         <input type="submit" name="submit" class="btn btn-secondary py-3 px-4" value="Submit" <?=$status;?>>
