@@ -12,10 +12,16 @@
 	          <li class="nav-item <?=$car;?>"><a href="<?=base_url();?>cars" class="nav-link">Cars</a></li>
               <?php
               if($this->session->user_login){
+				$chat=$this->Rental_model->getPendingChat($this->session->username);
+				if(count($chat) > 0){
+					$c="<font color='red'>(".count($chat).")</font>";
+				}else{
+					$c="";
+				}
               ?>
               <li class="nav-item <?=$booking;?>"><a href="<?=base_url();?>user_bookings" class="nav-link">My Bookings</a></li>
 	          <li class="nav-item <?=$profile;?>"><a href="<?=base_url();?>user_profile" class="nav-link">Profile</a></li>
-			  <li class="nav-item <?=$chatbot;?>"><a href="<?=base_url();?>chat_bot" class="nav-link">Chat Me</a></li>			  
+			  <li class="nav-item <?=$chatbot;?>"><a href="<?=base_url();?>chat_bot" class="nav-link">Chat Me <?=$c;?></a></li>			  
               <li class="nav-item"><a href="<?=base_url();?>user_logout" class="nav-link" onclick="return confirm('Do you wish to logout?');return false;">Logout</a></li>
               <?php
               }else{

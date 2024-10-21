@@ -407,5 +407,20 @@
             $result=$odb->query("SELECT * FROM chat WHERE sender='$username' OR receiver='$username' ORDER BY datearray ASC,timearray ASC");
             return $result->result_array();
         }
+        public function updateChatStatus($receiver){
+            $odb=$this->load->database('livechat',TRUE);
+            $odb->query("UPDATE chat SET `status`='seen' WHERE sender='$receiver'");
+            return true;
+        }
+        public function updateChatStatusUser($receiver){
+            $odb=$this->load->database('livechat',TRUE);
+            $odb->query("UPDATE chat SET `status`='seen' WHERE receiver='$receiver'");
+            return true;
+        }
+        public function getPendingChat($username){
+            $odb=$this->load->database('livechat',TRUE);
+            $result=$odb->query("SELECT * FROM chat WHERE receiver='$username' AND `status`='pending' GROUP BY `message`");
+            return $result->result_array();
+        }
     }
 ?>

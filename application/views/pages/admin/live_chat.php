@@ -71,11 +71,13 @@
                                             $user=$this->Rental_model->getSingleUser($item['sender']);
                                             if($item['receiver']==$livechat){
                                                 $al="right";
+                                                $color="green";
                                             }else{
                                                 $al="left";
+                                                $color="lightblue";
                                             }
                                             echo "<tr>";
-                                                echo "<td colspan='2' align='$al'><b>$user[fullname]</b><br><b style='background-color:lightblue; padding:5px; border-radius:10px; color:white; font-size:15px; font-weight:normal;'>$item[message]</b><br>".date('m/d/Y',strtotime($item['datearray']))." ".date('h:i A',strtotime($item['timearray']))."</td>";                                            
+                                                echo "<td colspan='2' align='$al'><b>$user[fullname]</b><br><b style='background-color:$color; padding:5px; border-radius:10px; color:white; font-size:15px; font-weight:normal;'>$item[message]</b><br>".date('m/d/Y',strtotime($item['datearray']))." ".date('h:i A',strtotime($item['timearray']))."</td>";                                            
                                             echo "</tr>";
                                         }
                                         ?>
@@ -88,7 +90,7 @@
                                             <td width="5%"><button type="submit" class="btn btn-success"><i class="fa fa-send"></i></button></td>
                                         <?=form_close();?>
                                         <tr>
-                                    </tr>
+                                     </tr>
                                     </tbody>
                                 </table>
                             </div>

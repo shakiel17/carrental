@@ -501,6 +501,7 @@ Thank you for your support and we will be glad if you come back and rent again."
             $data['profile'] = '';
             $data['chatbot'] = 'active';
             $data['userchat'] = $this->Rental_model->getUserChat();
+            $this->Rental_model->updateChatStatusUser($this->session->username);
             $this->load->view('templates/user/header');                        
             $this->load->view('templates/user/navbar',$data);
             $this->load->view('pages/'.$page,$data);            
