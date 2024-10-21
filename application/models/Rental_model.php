@@ -379,5 +379,33 @@
                 return false;
             }
         }
+        public function getUserChat(){
+            $username=$this->session->username;
+            $odb=$this->load->database('livechat',TRUE);
+            $result=$odb->query("SELECT * FROM chat WHERE (sender='$username' AND receiver='admin') OR (receiver='$username' AND sender='admin') ORDER BY datearray ASC,timearray ASC");
+            return $result->result_array();
+        }
+        public function save_chat($sender,$receiver,$message){
+            $odb=$this->load->database('livechat',TRUE);
+            $date=date('Y-m-d');
+            $time=date('H:i:s');
+            $odb->query("INSERT INTO chat(sender,receiver,`message`,`status`,datearray,timearray) VALUES('$sender','$receiver','$message','pending','$date','$time')");
+            return true;        
+        }
+        public function getAllPendingAdminChat(){
+            $odb=$this->load->database('livechat',TRUE);
+            $result=$odb->query("SELECT * FROM chat WHERE receiver='admin' AND `status`='pending' GROUP BY sender");
+            return $result->result_array();
+        }
+        public function getAllAdminChat(){
+            $odb=$this->load->database('livechat',TRUE);
+            $result=$odb->query("SELECT * FROM chat WHERE receiver='admin' GROUP BY sender");
+            return $result->result_array();
+        }
+        public function getSingleUserChat($username){            
+            $odb=$this->load->database('livechat',TRUE);
+            $result=$odb->query("SELECT * FROM chat WHERE sender='$username' OR receiver='$username' ORDER BY datearray ASC,timearray ASC");
+            return $result->result_array();
+        }
     }
 ?>

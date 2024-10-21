@@ -484,6 +484,36 @@ Thank you for your support and we will be glad if you come back and rent again."
             $this->load->view('templates/user/modal');                        
             $this->load->view('templates/user/footer');
         }
+        public function live_chat(){
+            $page = "live_chat";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }               
+            $data['user'] = $this->Rental_model->getUserEmailAdd($this->session->username);
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['profile'] = '';
+            $data['chatbot'] = 'active';
+            $data['userchat'] = $this->Rental_model->getUserChat();
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }                            
+        public function submit_chat_user(){
+            $sender=$this->session->username;
+            $receiver="admin";
+            $message=$this->input->post('message');
+            $save=$this->Rental_model->save_chat($sender,$receiver,$message);
+            redirect(base_url()."live_chat");
+        }
         //=================================Start of Admin Modules================================
         public function admin(){
             $page = "index";
@@ -729,6 +759,53 @@ Thank you for your support and we will be glad if you come back and rent again."
                 echo "<script>alert('Unable to save signature!');</script>";
             }
                 echo "<script>window.location='".base_url()."manage_agreement/$id';</script>";
+        }
+        public function live_chat_admin(){
+            $page = "live_chat";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }                        
+            $data['userchat'] = $this->Rental_model->getAllAdminChat();
+            $data['livechat'] = "";
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
+        }
+        public function live_chat_user($username){
+            $page = "live_chat";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }                        
+            $data['userchat'] = $this->Rental_model->getAllAdminChat();
+            $data['livechat'] = $username;
+            $data['chatuser'] = $this->Rental_model->getSingleUserChat($username);
+            $this->Rental_model->updateChatStatus($username);
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
+        }
+        public function save_chat(){
+            $receiver=$this->input->post('receiver');                        
+            $sender='admin';
+            $message=$this->input->post('message');                        
+            $this->Rental_model->save_chat($sender,$receiver,$message);
+            redirect(base_url()."live_chat_user/$receiver");           
         }
         //=================================End of Admin Modules================================
     }

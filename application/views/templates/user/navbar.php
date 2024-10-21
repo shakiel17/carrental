@@ -15,7 +15,7 @@
               ?>
               <li class="nav-item <?=$booking;?>"><a href="<?=base_url();?>user_bookings" class="nav-link">My Bookings</a></li>
 	          <li class="nav-item <?=$profile;?>"><a href="<?=base_url();?>user_profile" class="nav-link">Profile</a></li>
-			  <li class="nav-item <?=$chatbot;?>"><a href="<?=base_url();?>chat_bot" class="nav-link">Chat Me</a></li>
+			  <li class="nav-item <?=$chatbot;?>"><a href="<?=base_url();?>chat_bot" class="nav-link">Chat Me</a></li>			  
               <li class="nav-item"><a href="<?=base_url();?>user_logout" class="nav-link" onclick="return confirm('Do you wish to logout?');return false;">Logout</a></li>
               <?php
               }else{

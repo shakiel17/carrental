@@ -14,8 +14,10 @@
 			<div class="container">
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
-    				
-                        <iframe src="<?=base_url();?>chatbot" width="100%" height="750" style="border:0;" align="center"></iframe>    
+    			
+          <center><a href="<?=base_url();?>live_chat" style="font-size:20px;">Live Chat</a></center>
+                        <iframe src="<?=base_url();?>chatbot" width="100%" height="750" style="border:0;" align="center"></iframe>
+                        
 					
     			</div>
     		</div>
