@@ -1,6 +1,6 @@
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<?=base_url();?>design/assets/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
-      <div class="container">
+      <div class="container">        
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
           <div class="col-md-9 ftco-animate pb-5">
           	<p class="breadcrumbs"><span class="mr-2"><a href="<?=base_url();?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
@@ -49,24 +49,49 @@
                 ?>
                 <li class="<?=$all;?>"><a href="<?=base_url();?>cars">All</a></li>
                 <?php
+                $ty="";
+                $pct="";
+                $ht="";$sd="";
+                $ot="";
                 foreach($cartype as $item){
                     if($item['description'] =="PICK UP TRUCK"){
                         $desc="PCT";
                         $pct="active";
+                        $ty=$pct;                        
                     }elseif($item['description'] =="HATCHBACK"){
                         $desc="HTB";
+                        $ht="active";
+                        $ty=$ht;
                     }elseif($item['description'] =="SEDAN"){
                         $desc="SDN";
+                        $sd="active";
+                        $ty=$sd;
                     }else{
                         $desc=$item['description'];
+                        $ot="active";
+                        $ty=$ot;
                     }
                     ?>
-                    <li ><a href="<?=base_url();?>view_car_type/<?=$item['id'];?>"><?=$desc;?></a></li>
+                    <li><a href="<?=base_url();?>view_car_type/<?=$item['id'];?>"><?=$desc;?></a></li>
                     <?php
                 }
                 ?>                                
                 <!-- <li><a href="#">&gt;</a></li> -->
               </ul>
+            </div>
+            <div class="block-27" align="center">
+              <?=form_open(base_url()."check_rate");?>
+              <input type="hidden" name="type" value="<?=$type;?>">
+              <table width="30%" border="0">
+                <tr>
+                  <td colspan="4" align="center"><label>Filter by Rate</label></td>
+                </tr>
+                <tr>
+                  <td><input type="text" name="p1" class="form-control"></td><td> - </td><td><input type="text" name="p2" class="form-control"> </td>
+                  <td><input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                </tr>
+              </table>              
+              <?=form_close();?>
             </div>
           </div>
         </div>

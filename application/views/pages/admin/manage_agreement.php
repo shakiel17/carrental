@@ -63,7 +63,11 @@
                 $time_start=$item['time_rented'];
                 $date_return=$item['date_return'];
                 $time_return=$item['time_return'];
-                $signature=$item['signature'];
+                if($item['signature']==null){
+                    $signature="";
+                }else{
+                    $signature=$item['signature'];
+                }                
             }else{
                 $query = $this->Rental_model->db->query("SELECT * FROM booking WHERE id='$id'");
                 $book=$query->row_array();

@@ -42,6 +42,13 @@
             $result=$this->db->query("SELECT * FROM cartype ORDER BY `description` ASC");
             return $result->result_array();
         }
+        public function getAllCarRate(){
+            $p1=$this->input->post('p1');
+            $p2=$this->input->post('p2');
+            $type=$this->input->post('type');
+            $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c INNER JOIN cartype ct ON ct.id=c.type WHERE c.amount BETWEEN '$p1' AND '$p2' AND c.`type`='$type' ORDER BY `description` ASC");            
+            return $result->result_array();
+        }
         public function save_car(){
             $id=$this->input->post('id');
             $description=$this->input->post('description');

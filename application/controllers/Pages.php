@@ -50,6 +50,29 @@
             $this->load->view('templates/user/modal');                        
             $this->load->view('templates/user/footer');
         }
+        public function check_rate(){
+            $page = "cars";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }
+            $data['cars'] = $this->Rental_model->getAllCarRate();     
+            $data['cartype'] = $this->Rental_model->getAllCarType();       
+            $data['home'] = '';
+            $data['car'] = 'active';
+            $data['type'] = "";
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['profile'] = '';
+            $data['chatbot'] = '';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
         public function view_car_details($id){
             $page = "car_details";
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){

@@ -69,6 +69,11 @@
                                         <?php
                                         foreach($chatuser as $item){
                                             $user=$this->Rental_model->getSingleUser($item['sender']);
+                                            if($user){
+                                                
+                                            }else{
+                                                $user['fullname']="admin";
+                                            }
                                             if($item['receiver']==$livechat){
                                                 $al="right";
                                                 $color="green";
