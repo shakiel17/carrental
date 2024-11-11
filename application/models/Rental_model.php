@@ -46,7 +46,11 @@
             $p1=$this->input->post('p1');
             $p2=$this->input->post('p2');
             $type=$this->input->post('type');
-            $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c INNER JOIN cartype ct ON ct.id=c.type WHERE c.amount BETWEEN '$p1' AND '$p2' AND c.`type`='$type' ORDER BY `description` ASC");            
+            // if($type==""){
+            //     $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c INNER JOIN cartype ct ON ct.id=c.type WHERE c.amount BETWEEN '$p1' AND '$p2' AND c.`type`='$type' ORDER BY `description` ASC");
+            // }else{
+                $result=$this->db->query("SELECT c.*,ct.description as type_desc FROM cars c LEFT JOIN cartype ct ON ct.id=c.type WHERE c.amount BETWEEN '$p1' AND '$p2' ORDER BY `description` ASC");            
+            //}            
             return $result->result_array();
         }
         public function save_car(){
@@ -56,12 +60,13 @@
             $fuel_type=$this->input->post('fuel_type');
             $trans_type=$this->input->post('trans_type');
             $amount=$this->input->post('amount');            
+            $status=$this->input->post('status');
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
                 if($id==""){
                     $result=$this->db->query("INSERT INTO cars(`description`,`type`,`fuel_type`,`trans_type`,amount,datearray,timearray,`image`) VALUES('$description','$type','$fuel_type','$trans_type','$amount','$datearray','$timearray','')");
                 }else{
-                    $result=$this->db->query("UPDATE cars SET `description`='$description',`type`='$type',fuel_type='$fuel_type',trans_type='$trans_type',amount='$amount' WHERE id='$id'");
+                    $result=$this->db->query("UPDATE cars SET `description`='$description',`type`='$type',fuel_type='$fuel_type',trans_type='$trans_type',amount='$amount',`status`='$status' WHERE id='$id'");
                 }            
             if($result){
                 return true;
@@ -428,6 +433,26 @@
             $odb=$this->load->database('livechat',TRUE);
             $result=$odb->query("SELECT * FROM chat WHERE receiver='$username' AND `status`='pending' GROUP BY `message`");
             return $result->result_array();
+        }
+        public function update_booking(){
+            $id=$this->input->post('id');
+            $car_id=$this->input->post('car_id');
+            $startdate=$this->input->post('startdate');
+            $starttime=$this->input->post('starttime');
+            $enddate=$this->input->post('enddate');
+            $endtime=$this->input->post('endtime');
+            $destination=$this->input->post('destination');
+            $check=$this->db->query("SELECT * FROM booking WHERE car_id='$car_id' AND (date_started BETWEEN '$startdate' AND '$enddate' OR date_return BETWEEN '$startdate' AND '$enddate') AND `status`='booked'");
+            if($check->num_rows() > 0){
+                return false;
+            }else{
+                $result=$this->db->query("UPDATE booking SET date_started='$startdate',time_started='$starttime',date_return='$enddate',time_return='$endtime',destination='$destination' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 ?>

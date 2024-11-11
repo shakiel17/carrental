@@ -54,15 +54,15 @@
                 $ht="";$sd="";
                 $ot="";
                 foreach($cartype as $item){
-                    if($item['description'] =="PICK UP TRUCK"){
+                    if(strtoupper($item['description']) =="PICK UP TRUCK" || strtoupper($item['description']) == "PICK UP"){
                         $desc="PCT";
                         $pct="active";
                         $ty=$pct;                        
-                    }elseif($item['description'] =="HATCHBACK"){
+                    }elseif(strtoupper($item['description']) =="HATCHBACK"){
                         $desc="HTB";
                         $ht="active";
                         $ty=$ht;
-                    }elseif($item['description'] =="SEDAN"){
+                    }elseif(strtoupper($item['description']) =="SEDAN"){
                         $desc="SDN";
                         $sd="active";
                         $ty=$sd;

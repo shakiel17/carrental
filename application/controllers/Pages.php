@@ -343,12 +343,43 @@ Thank you.";
             $this->load->view('templates/user/modal');                        
             $this->load->view('templates/user/footer');
         }
+        public function edit_booking($id){
+            $page = "edit_booking";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }            
+            $data['id'] = $id;       
+            $data['item'] = $this->Rental_model->getProofPayment($id);
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = 'active';
+            $data['profile'] = '';
+            $data['chatbot'] = '';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
         public function upload_pop_save(){            
             $book=$this->Rental_model->upload_pop_save();
             if($book){
                 echo "<script type='text/javascript'>alert('Proof of Payment successfully uploaded!');window.location='".base_url()."user_bookings';</script>";
             }else{
                 echo "<script type='text/javascript'>alert('Unable to upload proof of payment!');window.location='".base_url()."user_bookings';</script>";
+            }
+        }
+        public function update_booking(){            
+            $book=$this->Rental_model->update_booking();
+            if($book){
+                echo "<script type='text/javascript'>alert('Booking details successfully updated!');window.location='".base_url()."user_bookings';</script>";
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to update booking details!');window.location='".base_url()."user_bookings';</script>";
             }
         }
         public function view_pop_image($id){
@@ -641,7 +672,7 @@ Thank you for your support and we will be glad if you come back and rent again."
             }
                 echo "<script>window.location='".base_url()."manage_cars';</script>";
         }
-        public function delete_ca($id){
+        public function delete_car($id){
             $save=$this->Rental_model->delete_car($id);
             if($save){
                 echo "<script>alert('Car Details successfully deleted!');</script>";
@@ -830,6 +861,25 @@ Thank you for your support and we will be glad if you come back and rent again."
             $message=$this->input->post('message');                        
             $this->Rental_model->save_chat($sender,$receiver,$message);
             redirect(base_url()."live_chat_user/$receiver");           
+        }
+        public function view_feedback($id){
+            $page = "view_feedback";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }
+            if($this->session->admin_login){
+                
+            }else{
+                echo "<script>alert('You are not authorized!');window.location='".base_url()."admin';</script>";
+            }                  
+            $data['id']=$id;
+            $data['items'] = $this->Rental_model->getSingleCarReview($id);            
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);     
+            $this->load->view('templates/admin/modal'); 
+            $this->load->view('templates/admin/footer');       
         }
         //=================================End of Admin Modules================================
     }

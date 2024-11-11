@@ -84,6 +84,7 @@
         document.getElementById('car_fuel_type').value = '';
         document.getElementById('car_trans_type').value = '';
         document.getElementById('car_amount').value = '';
+        document.getElementById('car_status').value = '';
       });
       $('.editCar').click(function(){
         var data=$(this).data('id');
@@ -94,6 +95,7 @@
         document.getElementById('car_fuel_type').value = id[3];
         document.getElementById('car_trans_type').value = id[4];
         document.getElementById('car_amount').value = id[5];
+        document.getElementById('car_status').value = id[6];
       });
       $('.addCarImage').click(function(){
         var id=$(this).data('id');

@@ -34,6 +34,7 @@
                       <li><a href="<?=base_url();?>manage_car_type">Car Type</a></li>
                       <li><a href="#" onclick="myChatSupport();">Chat Support</a></li>                                            
                       <li><a href="<?=base_url();?>track_vehicle">Monitor Vehicle</a></li>
+                      <li><a href="<?=base_url();?>manage_customer">Customer</a></li>
                     </ul>
                   </li>                                    
                 </ul>

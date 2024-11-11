@@ -64,6 +64,14 @@
                     <label>Amount</label>
                     <input type="text" class="form-control" name="amount" id="car_amount">
                 </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" class="form-control" id="car_status" required>
+                        <option value="">Select Status</option>
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">                
                 <button type="submit" class="btn btn-primary">Submit</button>

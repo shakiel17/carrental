@@ -15,15 +15,16 @@
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="car-list">
-	    				<table class="table">
+	    				<table class="table" style="font-size:16px;">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 							  	<th>&nbsp;</th>
 						        <th>&nbsp;</th>
 						        <th>&nbsp;</th>
-						        <th class="bg-primary heading">Destination</th>
-						        <th class="bg-dark heading">Inclusive Date/s</th>
-						        <th class="bg-black heading">Date & Time Booked</th>
+						        <th class="bg-primary">Destination</th>
+						        <th class="bg-dark">Inclusive Date/s</th>
+						        <th class="bg-black">Date & Time Booked</th>
+								<th class="bg-warning">Status/Remarks</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -72,6 +73,14 @@
 									}
 									echo "Status: ".$status;
 								}
+								$datenow=strtotime(date('Y-m-d'));
+								$startdate=strtotime($item['date_started']);
+								$diff=($startdate-$datenow)/86400;								
+								if($item['remarks'] <> "" && $diff >= 1 && $item['status'] <> "cancel" && $item['status'] <> "completed"){
+									?>
+									<a href="<?=base_url();?>edit_booking/<?=$item['id'];?>" class="btn btn-sm btn-info"><i class="ion-ios-edit"></i> Edit Booking</a>
+									<?php
+								}
 								?>
 								</td>
 						        <td class="product-name">
@@ -109,10 +118,14 @@
 						        	<p class="label"><?=$inc_date;?></p>
 						        </td>
 
-						        <td >
+						        <td>
 						        	<p class="label"><?=date('m/d/Y',strtotime($item['datearray']));?> <?=date('h:i A',strtotime($item['timearray']));?></p>						        	
 						        </td>
-						      </tr><!-- END TR-->
+									<td align="center">
+										<p class="label"><?=$item['status'];?><br><?=$item['remarks'];?></p>
+									</td>
+						      </tr>							  	
+							  <!-- END TR-->
                               <?php
                                 }
                                 ?>

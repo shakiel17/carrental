@@ -25,6 +25,7 @@
                                             <th>Transmission</th>
                                             <th>Amount</th>
                                             <th>Status</th>                                            
+                                            <th width="10%">Customer Feedback</th>
                                             <th>Action</th>                                            
                                         </tr>
                                     </thead>
@@ -46,9 +47,10 @@
                                                 echo "<td>$item[trans_type]</td>";
                                                 echo "<td align='right'>".number_format($item['amount'],2)."</td>";
                                                 echo "<td>$item[status]</td>";
+                                                echo "<td align='center'><a href='".base_url()."view_feedback/$item[id]' class='btn btn-success btn-sm'>View Feedback</a></td>";
                                                 echo "<td>";
                                                 ?>
-                                                    <a href="#" class="btn btn-warning btn-sm editCar" data-toggle="modal" data-target=".manageCar" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$item['type'];?>_<?=$item['fuel_type'];?>_<?=$item['trans_type'];?>_<?=$item['amount'];?>">Edit</a>
+                                                    <a href="#" class="btn btn-warning btn-sm editCar" data-toggle="modal" data-target=".manageCar" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$item['type'];?>_<?=$item['fuel_type'];?>_<?=$item['trans_type'];?>_<?=$item['amount'];?>_<?=$item['status'];?>">Edit</a>
                                                     <a href="<?=base_url();?>delete_car/<?=$item['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you wish to delete this item?');return false;">Delete</a>
                                                 <?php
                                                 echo "</td>";

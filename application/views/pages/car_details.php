@@ -178,7 +178,14 @@ if($check->num_rows()>0){
 								   					</span>
 								   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 									   			</p>
-									   			<p><?=$row['details'];?></p>
+												<?php
+												$details=str_replace('gago','g***',$row['details']);
+												$details=str_replace('yawa','y***',$details);
+												$details=str_replace('putang','p****',$details);
+												$details=str_replace('puta','p***',$details);
+												$details=str_replace('shit','s***',$details);												
+												?>
+									   			<p><?=$details;?></p>
 									   		</div>
 									   	</div>								
                       <?php

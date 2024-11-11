@@ -77,7 +77,7 @@
                                 <td>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" name="password" class="form-control" value="" required>
+                                        <input type="password" name="password" class="form-control" value="" required>
                                     </div>
                                 </td>
                                 <td>
@@ -92,7 +92,24 @@
                                 </td>                                
                             </tr>
 						  </table>
-					  </div>
+					</div>
+                    <div class="car-list">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td cosl="3"><b>Proof of Identity/Residency</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Valid ID 1</b></td>
+                                <td><b>Valid ID 2</b></td>
+                                <td><b>Proof of Residency</b></td>
+                            </tr>
+                            <tr>
+                                <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($user['valid_id_1']);?>" width="300"></td>
+                                <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($user['valid_id_2']);?>" width="300"></td>
+                                <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($user['proof_of_address']);?>" width="300"></td>
+                            </tr>
+                        </table>
+                    </div>
     			</div>
     		</div>
 			</div>
