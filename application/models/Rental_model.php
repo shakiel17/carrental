@@ -209,10 +209,10 @@
             $date_return=$this->input->post('date_return');
             $time_return=$this->input->post('time_return');
             $destination=$this->input->post('destination');
-            $mode=$this->input->post('payment');
+            $mode=$this->input->post('payment');            
             $datearray=date('Y-m-d');
             $timearray=date('H:i:s');
-            $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray,payment_type) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray','$mode')");
+                $result=$this->db->query("INSERT INTO booking(customer_id,car_id,date_started,time_started,date_return,time_return,destination,datearray,timearray,payment_type) VALUES('$username','$id','$date_start','$time_start','$date_return','$time_return','$destination','$datearray','$timearray','$mode')");                  
             if($result){
                 return true;
             }else{
@@ -457,6 +457,15 @@
         public function getAllCustomer(){
             $result=$this->db->query("SELECT * FROM customer ORDER BY lastname ASC, firstname ASC");
             return $result->result_array();
+        }
+        public function add_remarks($id){
+            $remarks="For reschedule, customers should be able to reschedule atleast one day before the original scheduled date.";
+            $result=$this->db->query("UPDATE booking SET remarks='$remarks' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 ?>

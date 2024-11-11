@@ -24,7 +24,7 @@
 						        <th class="bg-primary">Destination</th>
 						        <th class="bg-dark">Inclusive Date/s</th>
 						        <th class="bg-black">Date & Time Booked</th>
-								<th class="bg-warning">Status/Remarks</th>
+								<th class="bg-warning" width="20%">Status/Remarks</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -121,8 +121,8 @@
 						        <td>
 						        	<p class="label"><?=date('m/d/Y',strtotime($item['datearray']));?> <?=date('h:i A',strtotime($item['timearray']));?></p>						        	
 						        </td>
-									<td align="center">
-										<p class="label"><?=$item['status'];?><br><?=$item['remarks'];?></p>
+									<td>
+										<p class="label"><?=$item['status'];?><br>Note: <?=$item['remarks'];?></p>
 									</td>
 						      </tr>							  	
 							  <!-- END TR-->

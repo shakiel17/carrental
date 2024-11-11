@@ -28,7 +28,15 @@ if($check->num_rows()>0){
       				<div class="text text-center">
       					<span class="subheading"><?=$cars['car_type'];?></span>
       					<h2><?=$cars['description'];?></h2>
+						<?php
+						if($cars['status']=="available"){
+						?>
 						<a href="<?=base_url();?>car_booking/<?=$id;?>" class="btn btn-success" <?=$status;?>>Book Now</a>
+						<?php
+						}else{
+							echo "Car Unavailable";
+						}
+						?>
       				</div>
       			</div>
       		</div>

@@ -34,7 +34,7 @@
                       <div class="row">
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">                    					
-                                <table id="datatable-responsive"  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                <table id="datatable-responsive"  class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -43,8 +43,8 @@
                                             <th>Date/Time Departure</th>
                                             <th>Date/Time Return</th>
                                             <th>Destination</th>
-                                            <th>Status</th>
-                                            <th>Payment Status</th>
+                                            <th width="20%">Status/Remarks</th>
+                                            <th>Payment Status</th>                                            
                                             <th>Action</th>                                            
                                         </tr>
                                     </thead>
@@ -61,22 +61,32 @@
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."</td>";
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']))."</td>";
                                                 echo "<td>$item[destination]</td>";
-                                                echo "<td>$item[status]</td>";
+                                                echo "<td>$item[status]<br>Note: $item[remarks]</td>";
                                                 echo "<td align='center'>";
                                                 if($item['proof_of_payment']==""){
-                                                    echo "No Proof of Payment Yet!";
-                                                }else{                                                
+                                                    if($item['payment_type']=="GCash"){
+                                                        echo "No Proof of Payment Yet!";
+                                                    }else{
+                                                        echo "Cash Payment";
+                                                    }                 
+                                                }else{                      
                                                 ?>                                                
                                                 <img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($item['proof_of_payment']);?>" width="30">
                                                 <br><a href="<?=base_url();?>view_pop_image/<?=$item['id'];?>"  target="_blank">View Image</a>
                                                 <?php
-                                                }
+                                                }                                                
                                                 echo "</td>";
                                                 ?>
                                                 <td style="font-size:20px;" align="center">
                                                     <?php
                                                     if($item['status']=="pending"){
-                                                        ?>
+                                                        if($item['remarks']==""){
+                                                            $rem="";
+                                                        }else{
+                                                            $rem="style='display:none;'";
+                                                        }
+                                                        ?>                                                        
+                                                        <a href="<?=base_url();?>add_remarks/<?=$item['id'];?>" onclick="return confirm('Do you wish to set reschedule this booking?');return false;" <?=$rem;?>><span class="badge badge-warning text-white">Reschedule</span></a>
                                                         <a href="#" class="confirmBooking" data-toggle="modal" data-target="#ConfirmBooking" data-id="<?=$item['id'];?>"><span class="badge badge-success text-white">Confirm</span></a>
                                                         <a href="<?=base_url();?>cancel_booking/<?=$item['id'];?>" onclick="return confirm('Do you wish to cancel this booking?');return false;"><span class="badge badge-danger text-white">Cancel</span></a>
                                                         <?php

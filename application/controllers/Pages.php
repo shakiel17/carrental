@@ -238,11 +238,16 @@
             $id=$this->input->post('car_id');
             $startdate=$this->input->post('date_start');
             $enddate=$this->input->post('date_return');
+            $datearray=date('Y-m-d');
+            $timearray=date('H:i:s');
             $check=$this->Rental_model->check_availability($id,$startdate,$enddate);
             if($check){
                 echo "<script type='text/javascript'>alert('Unable to save booking! Unit is not available on your preferred date!');window.location='".base_url()."car_booking/$id';</script>";
             }else{
-                
+
+                if($startdate <= $datearray || $enddate <= $datearray){
+                    echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
+                }else{  
                     $message="Hello,
             
 Thank you for booking with us. Please wait a few moment for the administrator to review your booking details.
@@ -273,7 +278,8 @@ God Bless you always.";
                         echo "<script type='text/javascript'>alert('Booking Successfully saved! We sent you a confirmation email for your reference. Thank you!');window.location='".base_url()."user_bookings';</script>";
                     }else{
                         echo "<script type='text/javascript'>alert('Unable to save booking!');window.location='".base_url()."car_booking/$id';</script>";
-                    }                   
+                    } 
+                }                  
             }            
         }
         public function cancel_user_booking($id){
@@ -591,7 +597,7 @@ Thank you for your support and we will be glad if you come back and rent again."
                 $this->session->set_userdata($user_data);
                 redirect(base_url()."admin_main");
             }else{
-                echo "<script>alert('Invalid username and password!');window.location='".base_url()."admin';</>";
+                echo "<script>alert('Invalid username and password!');window.location='".base_url()."admin';</script>";
             }
         }
         public function admin_logout(){
@@ -916,6 +922,15 @@ Thank you for your support and we will be glad if you come back and rent again."
             $this->load->view('pages/admin/'.$page,$data);     
             $this->load->view('templates/admin/modal'); 
             $this->load->view('templates/admin/footer');       
+        }
+        public function add_remarks($id){            
+            $save=$this->Rental_model->add_remarks($id);
+            if($save){
+                echo "<script>alert('Booking successfully set for reschedule!');</script>";
+            }else{                                
+                echo "<script>alert('Unable to set reschedule booking!');</script>";
+            }
+                echo "<script>window.location='".base_url()."manage_bookings';</script>";
         }
         //=================================End of Admin Modules================================
     }
