@@ -56,7 +56,7 @@
                                             $car=$this->Rental_model->getSingleCar($item['car_id']);
                                             echo "<tr>";
                                                 echo "<td>$x.</td>";
-                                                echo "<td>$user[fullname]</td>";
+                                                echo "<td>$user[fullname] <small><a href='".base_url()."view_profile/$user[username]' style='color:red'>View Profile</a></small></td>";
                                                 echo "<td>$car[description]</td>";
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_started']))." ".date('h:i A',strtotime($item['time_started']))."</td>";
                                                 echo "<td>".date('M-d-Y',strtotime($item['date_return']))." ".date('h:i A',strtotime($item['time_return']))."</td>";
