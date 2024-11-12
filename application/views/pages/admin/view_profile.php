@@ -59,8 +59,8 @@
                                     <td><b>Proof of Address</b></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($item['valid_id_2']);?>"></td>                                    
-                                    <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($item['proof_of_address']);?>"></td>
+                                    <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($item['valid_id_2']);?>" width="300"></td>                                    
+                                    <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($item['proof_of_address']);?>" width="300"></td>
                                 </tr>
                             </table>
                           </div>                         

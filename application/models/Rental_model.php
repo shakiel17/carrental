@@ -459,8 +459,33 @@
             return $result->result_array();
         }
         public function add_remarks($id){
-            $remarks="For reschedule, customers should be able to reschedule atleast one day before the original scheduled date.";
+            $remarks="For reschedule, customers should be able to reschedule atleast one day before the original scheduled date. Please DM to the admin.";
             $result=$this->db->query("UPDATE booking SET remarks='$remarks' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_valid_id(){
+            $id=$this->input->post('id');
+            $doc=$this->input->post('doc');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('jpg','png','jpeg','gif');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                if($doc=="id1"){
+                    $result=$this->db->query("UPDATE customer SET `valid_id_1`='$imgContent' WHERE id='$id'");
+                }else if($doc=="id2"){
+                    $result=$this->db->query("UPDATE customer SET `valid_id_2`='$imgContent' WHERE id='$id'");
+                }else{
+                    $result=$this->db->query("UPDATE customer SET `proof_of_address`='$imgContent' WHERE id='$id'");
+                }
+            }else{
+                return false;
+            }            
             if($result){
                 return true;
             }else{

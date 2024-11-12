@@ -99,9 +99,9 @@
                                 <td cosl="3"><b>Proof of Identity/Residency</b></td>
                             </tr>
                             <tr>
-                                <td><b>Valid ID 1</b></td>
-                                <td><b>Valid ID 2</b></td>
-                                <td><b>Proof of Residency</b></td>
+                                <td><b>Valid ID 1</b> <a href="<?=base_url();?>edit_id/<?=$user['id'];?>/id1" class="btn btn-success btn-sm">Edit</a></td>
+                                <td><b>Valid ID 2</b> <a href="<?=base_url();?>edit_id/<?=$user['id'];?>/id2" class="btn btn-success btn-sm">Edit</a></td>
+                                <td><b>Proof of Residency</b> <a href="<?=base_url();?>edit_id/<?=$user['id'];?>/address" class="btn btn-success btn-sm">Edit</a></td>
                             </tr>
                             <tr>
                                 <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($user['valid_id_1']);?>" width="300"></td>

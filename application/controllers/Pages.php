@@ -575,6 +575,42 @@ Thank you for your support and we will be glad if you come back and rent again."
             $save=$this->Rental_model->save_chat($sender,$receiver,$message);
             redirect(base_url()."live_chat");
         }
+        public function edit_id($id,$doc){
+            $page = "edit_id";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }
+            // if($this->session->user_login){
+            //     redirect(base_url()."main");
+            // }               
+            $data['id'] = $id;
+            $data['doc'] = $doc;
+            $data['home'] = '';
+            $data['car'] = '';
+            $data['type'] = '';
+            $data['login'] = '';
+            $data['booking'] = '';
+            $data['profile'] = 'active';
+            $data['chatbot'] = '';
+            $this->load->view('templates/user/header');                        
+            $this->load->view('templates/user/navbar',$data);
+            $this->load->view('pages/'.$page,$data);            
+            $this->load->view('templates/user/modal');                        
+            $this->load->view('templates/user/footer');
+        }
+        public function save_valid_id(){                   
+            $doc=$this->input->post('doc');
+            $save=$this->Rental_model->save_valid_id();
+            if($save){
+                if($doc=="id1" || $doc=="id2"){
+                    echo "<script type='text/javascript'>alert('Valid ID successfully updated!');window.location='".base_url()."user_profile';</script>";            
+                }else{
+                    echo "<script type='text/javascript'>alert('Proof of address successfully updated!');window.location='".base_url()."user_profile';</script>";            
+                }                
+            }else{
+                echo "<script type='text/javascript'>alert('Unable to update documents!');window.location='".base_url()."user_profile';</script>";
+            }
+        }
         //=================================Start of Admin Modules================================
         public function admin(){
             $page = "index";

@@ -47,6 +47,7 @@ $car=$this->Rental_model->getSingleCar($id);
                           $details=str_replace('putang','p****',$details);
                           $details=str_replace('puta','p***',$details);
                           $details=str_replace('shit','s***',$details);
+                          $details=str_replace('fuck','f***',$details);
                           ?>
                           <p class="excerpt"><?=$details;?></a>
                           </p>

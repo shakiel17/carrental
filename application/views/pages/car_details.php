@@ -191,7 +191,8 @@ if($check->num_rows()>0){
 												$details=str_replace('yawa','y***',$details);
 												$details=str_replace('putang','p****',$details);
 												$details=str_replace('puta','p***',$details);
-												$details=str_replace('shit','s***',$details);												
+												$details=str_replace('shit','s***',$details);
+												$details=str_replace('fuck','f***',$details);
 												?>
 									   			<p><?=$details;?></p>
 									   		</div>
