@@ -459,7 +459,7 @@
             return $result->result_array();
         }
         public function add_remarks($id){
-            $remarks="For reschedule, customers should be able to reschedule atleast one day before the original scheduled date. Please DM to the admin.";
+            $remarks="For Reschedule";
             $result=$this->db->query("UPDATE booking SET remarks='$remarks' WHERE id='$id'");
             if($result){
                 return true;

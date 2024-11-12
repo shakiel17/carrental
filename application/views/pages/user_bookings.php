@@ -122,7 +122,7 @@
 						        	<p class="label"><?=date('m/d/Y',strtotime($item['datearray']));?> <?=date('h:i A',strtotime($item['timearray']));?></p>						        	
 						        </td>
 									<td>
-										<p class="label"><?=$item['status'];?><br>Note: <?=$item['remarks'];?></p>
+										<p class="label"><?=$item['status'];?><br>Note: For reschedule, customers should be able to reschedule atleast one day before the original scheduled date. Please DM to the admin.</p>
 									</td>
 						      </tr>							  	
 							  <!-- END TR-->
